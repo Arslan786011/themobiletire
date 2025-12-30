@@ -30,6 +30,21 @@
         padding-top: 50px;
     }
 
+    /* INITIALIZE OVERLAY (Fixes iPhone Video) */
+    #init-overlay {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: #000; z-index: 9999;
+        display: flex; flex-direction: column; justify-content: center; align-items: center;
+        transition: opacity 0.5s ease;
+    }
+    .init-btn {
+        border: 1px solid var(--cyan); color: var(--cyan); padding: 20px 40px;
+        font-family: 'Manrope', sans-serif; font-weight: 800; letter-spacing: 2px;
+        text-transform: uppercase; background: rgba(0, 242, 255, 0.1);
+        cursor: pointer; animation: pulse-btn 2s infinite;
+    }
+    @keyframes pulse-btn { 0% { box-shadow: 0 0 0 0 rgba(0, 242, 255, 0.4); } 70% { box-shadow: 0 0 0 20px rgba(0, 242, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 242, 255, 0); } }
+
     /* Ticker */
     .ticker {
       width: 100%; background: rgba(0,0,0,0.9); border-bottom: 1px solid var(--cyan);
@@ -40,7 +55,7 @@
     .ticker-content span { padding-right: 50px; }
     @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-    /* VIDEO CONTAINER - BLACK BACKGROUND FALLBACK */
+    /* VIDEO CONTAINER */
     .video-container { 
         position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
         z-index: -2; background: #000; overflow: hidden; 
@@ -118,6 +133,11 @@
 </head>
 <body>
 
+  <div id="init-overlay" onclick="startSystem()">
+    <div style="font-size: 40px; color: var(--cyan); margin-bottom: 20px;"><i class="fas fa-power-off"></i></div>
+    <div class="init-btn">TAP TO INITIALIZE SYSTEM</div>
+  </div>
+
   <div class="ticker">
     <div class="ticker-content">
       <span>🚨 EMERGENCY 24/7 SERVICE AVAILABLE</span>
@@ -129,7 +149,7 @@
   </div>
 
   <div class="video-container">
-    <video id="bgVideo" autoplay muted loop playsinline webkit-playsinline preload="auto">
+    <video id="bgVideo" muted loop playsinline webkit-playsinline preload="auto">
       <source src="sprinter-bg.mp4" type="video/mp4">
     </video>
   </div>
@@ -171,58 +191,4 @@
     <div class="reviews-ticker-wrapper">
       <div class="reviews-content">
         <div class="review-item">
-          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-          <p style="font-size: 13px;">"Professional, fast, and great pricing. Came to my work and finished in 30 mins."</p>
-          <div style="color: var(--cyan); font-size: 11px; font-weight: 800; margin-top: 15px;">MIKE R. • VERIFIED CUSTOMER</div>
-        </div>
-        <div class="review-item">
-          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-          <p style="font-size: 13px;">"Saved me from a flat on the 401. Arrived quickly and got me back on the road."</p>
-          <div style="color: var(--cyan); font-size: 11px; font-weight: 800; margin-top: 15px;">SARAH J. • VERIFIED CUSTOMER</div>
-        </div>
-        <div class="review-item">
-          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-          <p style="font-size: 13px;">"Professional, fast, and great pricing. Came to my work and finished in 30 mins."</p>
-          <div style="color: var(--cyan); font-size: 11px; font-weight: 800; margin-top: 15px;">MIKE R. • VERIFIED CUSTOMER</div>
-        </div>
-      </div>
-    </div>
-
-    <section id="quote" style="padding-bottom: 200px;">
-      <div class="tech-card" style="max-width: 600px; margin: 0 auto; border-color: var(--cyan);" data-aos="zoom-in">
-        <h3 style="text-align: center; margin-bottom: 30px; letter-spacing: 2px;">REQUEST DEPLOYMENT</h3>
-        <form onsubmit="sendEmail(event)">
-          <input type="text" id="cName" placeholder="CLIENT NAME" required style="width: 100%; background:transparent; border:none; border-bottom:1px solid #333; padding: 18px 0; color: #fff; margin-bottom: 20px; font-family: inherit;">
-          <input type="text" id="cPhone" placeholder="CONTACT NUMBER" required style="width: 100%; background:transparent; border:none; border-bottom:1px solid #333; padding: 15px 0; color: #fff; margin-bottom: 20px; font-family: inherit;">
-          <textarea id="cDetails" placeholder="TIRE SIZE & LOCATION DATA" style="width: 100%; background:transparent; border:none; border-bottom:1px solid #333; padding: 15px 0; color: #fff; margin-bottom: 30px; height: 80px; font-family: inherit;"></textarea>
-          <button type="submit" style="width: 100%; background: var(--cyan); color: #000; border: none; padding: 22px; border-radius: 4px; font-weight: 800; cursor: pointer; text-transform: uppercase;">Execute Deployment</button>
-        </form>
-      </div>
-    </section>
-  </main>
-
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
-    AOS.init({ duration: 1500, once: true });
-    
-    function sendEmail(e) {
-      e.preventDefault();
-      const body = `Client: ${document.getElementById('cName').value}%0D%0APhone: ${document.getElementById('cPhone').value}%0D%0AData: ${document.getElementById('cDetails').value}`;
-      window.location.href = `mailto:mirzaartslan@gmail.com?subject=Tire Service Request&body=${body}`;
-    }
-
-    // --- JAVASCRIPT FORCE PLAY SCRIPT ---
-    // This script physically commands the browser to play the video if it gets stuck.
-    document.addEventListener('DOMContentLoaded', function() {
-        var video = document.getElementById("bgVideo");
-        if (video) {
-            video.muted = true; // Ensure muted
-            video.play().catch(function(error) {
-                console.log("Video autoplay blocked or failed:", error);
-                // If it fails, we already have a black background fallback
-            });
-        }
-    });
-  </script>
-</body>
-</html>
+          <div class="stars"><i class="fas fa-star"></i><i class="fas
