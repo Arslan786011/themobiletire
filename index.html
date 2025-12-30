@@ -19,7 +19,6 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    /* FIXED: Restored full scrolling */
     body { font-family: 'Manrope', sans-serif; background-color: var(--bg); color: #fff; overflow-x: hidden; line-height: 1.6; overflow-y: auto; }
     .container { max-width: 1300px; margin: 0 auto; padding: 0 20px; }
 
@@ -34,10 +33,10 @@
     .ticker-content span { padding-right: 50px; }
     @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-    /* Video Background */
-    .video-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; }
+    /* Video Background - MOBILE FIX APPLIED HERE */
+    .video-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; background: #000; }
     .video-container video { width: 100%; height: 100%; object-fit: cover; opacity: 0.35; filter: saturate(0.5); }
-    .vignette { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, transparent 20%, var(--bg) 95%); z-index: -1; }
+    .vignette { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, transparent 20%, var(--bg) 95%); z-index: -1; pointer-events: none; }
 
     /* Hero Section */
     .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding-top: 60px; }
@@ -45,7 +44,7 @@
     .hero h1 span { color: var(--cyan); text-shadow: 0 0 40px rgba(0, 242, 255, 0.4); }
     .hero p { max-width: 600px; font-size: clamp(1rem, 4vw, 1.25rem); color: #888; font-weight: 300; padding: 0 10px; }
 
-    /* PERFECT ROUND DOCK & CIRCULAR PULSE */
+    /* Perfectly Round Floating Dock */
     .dock-wrapper {
       position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
       background: rgba(15, 15, 15, 0.85); backdrop-filter: blur(20px);
@@ -59,17 +58,13 @@
       text-decoration: none; color: white; font-size: 1.1rem;
       position: relative; transition: 0.3s ease;
     }
-    /* THE CIRCULAR PING PULSE */
     .pulse-call { background: #22c55e; }
     .pulse-call::after {
       content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
       border-radius: 50%; background: #22c55e;
       z-index: -1; animation: ping-circle 2s infinite;
     }
-    @keyframes ping-circle {
-      0% { transform: scale(1); opacity: 0.8; }
-      100% { transform: scale(1.8); opacity: 0; }
-    }
+    @keyframes ping-circle { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(1.8); opacity: 0; } }
     .pulse-wa { background: #25D366; }
     .get-quote {
       background: var(--cyan); color: #000; padding: 0 20px;
@@ -86,18 +81,11 @@
     }
     .tech-card i { color: var(--cyan); font-size: 1.8rem; margin-bottom: 20px; display: block; }
 
-    /* MOVING REVIEWS TICKER */
+    /* Moving Reviews Ticker */
     .reviews-ticker-wrapper { width: 100%; background: rgba(0,0,0,0.3); border-top: 1px solid var(--glass-border); padding: 40px 0; margin: 60px 0 120px; overflow: hidden; white-space: nowrap; }
     .reviews-content { display: inline-block; animation: ticker 50s linear infinite; }
     .review-item { display: inline-block; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 12px; padding: 25px; margin: 0 15px; width: 300px; vertical-align: top; white-space: normal; }
     .stars { color: #facc15; font-size: 12px; margin-bottom: 8px; }
-
-    /* Responsive adjustments */
-    @media (max-width: 480px) {
-      .hero h1 { letter-spacing: -2px; line-height: 0.95; }
-      .tech-grid { margin-bottom: 80px; }
-      .reviews-ticker-wrapper { margin-bottom: 150px; }
-    }
   </style>
 </head>
 <body>
@@ -113,7 +101,7 @@
   </div>
 
   <div class="video-container">
-    <video autoplay muted loop playsinline>
+    <video autoplay muted loop playsinline preload="auto" poster="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
       <source src="sprinter-bg.mp4" type="video/mp4">
     </video>
   </div>
@@ -129,7 +117,7 @@
     <section class="hero" data-aos="fade-up">
       <div style="font-size: 10px; letter-spacing: 4px; color: var(--cyan); margin-bottom: 15px; font-weight: 800;">GTA • DURHAM • 24/7</div>
       <h1>THE MOBILE<br><span>TIRE.</span></h1>
-      <p>The modern standard for automotive service. Precision tire swaps and balancing delivered to your driveway.</p>
+      <p>The modern standard for automotive service. Precision tire swaps and balancing delivered directly to your driveway.</p>
     </section>
 
     <div class="tech-grid">
@@ -142,11 +130,6 @@
         <i class="fas fa-microchip"></i>
         <h3>Flat Repair</h3>
         <p>Rapid response for punctures, bead leaks, and digital sensor resets.</p>
-      </div>
-      <div class="tech-card" data-aos="fade-up" data-aos-delay="200">
-        <i class="fas fa-crosshairs"></i>
-        <h3>Off-Rim Balance</h3>
-        <p>Computer-guided electronic balancing for optimal road performance.</p>
       </div>
     </div>
 
@@ -162,11 +145,6 @@
           <p style="font-size: 13px;">"Saved me from a flat on the 401. Professional and fast."</p>
           <div style="color: var(--cyan); font-size: 10px; font-weight: 800; margin-top: 10px;">SARAH J. • VERIFIED</div>
         </div>
-        <div class="review-item">
-          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-          <p style="font-size: 13px;">"Best mobile service in Durham. Swapped my tires in 30 mins."</p>
-          <div style="color: var(--cyan); font-size: 10px; font-weight: 800; margin-top: 10px;">MIKE R. • VERIFIED</div>
-        </div>
       </div>
     </div>
 
@@ -174,10 +152,10 @@
       <div class="tech-card" style="max-width: 600px; margin: 0 auto; border-color: var(--cyan);" data-aos="zoom-in">
         <h3 style="text-align: center; margin-bottom: 30px;">Initiate Deployment</h3>
         <form onsubmit="sendEmail(event)">
-          <input type="text" id="cName" placeholder="CLIENT NAME" required style="width: 100%; background:transparent; border:none; border-bottom:1px solid #333; padding: 15px 0; color: #fff; margin-bottom: 20px; font-family: inherit;">
-          <input type="text" id="cPhone" placeholder="CONTACT NUMBER" required style="width: 100%; background:transparent; border:none; border-bottom:1px solid #333; padding: 15px 0; color: #fff; margin-bottom: 20px; font-family: inherit;">
-          <textarea id="cDetails" placeholder="TIRE SIZE & LOCATION DATA" style="width: 100%; background:transparent; border:none; border-bottom:1px solid #333; padding: 15px 0; color: #fff; margin-bottom: 30px; height: 80px; font-family: inherit;"></textarea>
-          <button type="submit" style="width: 100%; background: var(--cyan); color: #000; border: none; padding: 22px; border-radius: 4px; font-weight: 800; cursor: pointer; text-transform: uppercase; letter-spacing: 2px;">Execute Deployment</button>
+          <input type="text" id="cName" placeholder="CLIENT NAME" required style="width: 100%; background:transparent; border:none; border-bottom:1px solid #333; padding: 15px 0; color: #fff; margin-bottom: 20px;">
+          <input type="text" id="cPhone" placeholder="CONTACT NUMBER" required style="width: 100%; background:transparent; border:none; border-bottom:1px solid #333; padding: 15px 0; color: #fff; margin-bottom: 20px;">
+          <textarea id="cDetails" placeholder="TIRE SIZE & LOCATION DATA" style="width: 100%; background:transparent; border:none; border-bottom:1px solid #333; padding: 15px 0; color: #fff; margin-bottom: 30px; height: 80px;"></textarea>
+          <button type="submit" style="width: 100%; background: var(--cyan); color: #000; border: none; padding: 22px; border-radius: 4px; font-weight: 800; cursor: pointer; text-transform: uppercase;">Execute Deployment</button>
         </form>
       </div>
     </section>
