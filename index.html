@@ -3,52 +3,47 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>TheMobileTire | Mobile Tire Service (GTA + Durham)</title>
-  <meta name="description" content="TheMobileTire — Mobile tire swaps, flat repairs, mounting & balancing, TPMS, valve stems, tires & rims. We come to you across GTA + Durham. Call/text to book." />
+  <title>TheMobileTire — Mobile Tire Service (GTA + Durham)</title>
+  <meta name="description" content="TheMobileTire — Premium mobile tire service. Tire swaps, flat repairs, mounting & balancing, TPMS. We come to you across GTA + Durham." />
 
-  <!-- Simple modern font (safe) -->
+  <!-- Clean, modern type like a tech brand -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root{
-  --bg:#0f0f0f;
-  --bg2:#161616;
-  --card:rgba(255,255,255,.04);
-  --line:rgba(255,255,255,.12);
-  --text:#ffffff;
-  --muted:#d1d1d1;
-
-  --brand:#ffcc00;     /* main yellow */
-  --brand2:#ffcc00;    /* buttons */
-  --accent:#000000;    /* black contrast */
-
-  --shadow: 0 18px 55px rgba(0,0,0,.65);
-  --r:16px;
-  --max:1140px;
-}
-
+      --bg:#ffffff;
+      --ink:#0b0f17;
+      --muted:#5b6475;
+      --line:rgba(11,15,23,.12);
+      --soft:rgba(11,15,23,.04);
+      --accent:#ffd400;     /* “premium” accent */
+      --accent2:#2b59ff;    /* optional secondary accent */
+      --max:1160px;
+      --r:18px;
+      --shadow: 0 22px 55px rgba(11,15,23,.08);
+    }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{
       margin:0;
-      font-family: Manrope, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(1200px 600px at 15% -10%, rgba(109,94,252,.35), transparent 55%),
-        radial-gradient(1100px 600px at 95% 0%, rgba(34,197,94,.22), transparent 55%),
-        radial-gradient(900px 500px at 60% 110%, rgba(0,212,255,.12), transparent 60%),
-        linear-gradient(180deg, var(--bg), var(--bg2));
-      line-height:1.45;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--ink);
+      background: var(--bg);
+      line-height:1.4;
+      overflow-x:hidden;
     }
     a{color:inherit;text-decoration:none}
-    .wrap{max-width:var(--max);margin:0 auto;padding:18px}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 18px}
+    .thin{font-weight:300}
+    .muted{color:var(--muted)}
+    .sr{position:absolute;left:-9999px}
 
-    /* Top call bar (like the example site) */
+    /* Top utility bar */
     .topbar{
-      background: rgba(0,0,0,.22);
-      border-bottom: 1px solid var(--line);
+      border-bottom:1px solid var(--line);
+      background: linear-gradient(90deg, rgba(255,212,0,.22), rgba(255,255,255,0));
     }
     .topbar .inner{
       max-width:var(--max);
@@ -62,36 +57,48 @@
       font-size:13px;
       color:var(--muted);
     }
-    .topbar b{color:var(--text)}
-    .miniBtns{display:flex;gap:10px;flex-wrap:wrap}
-    .mini{
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 10px;
+      border-radius:999px;
+      background: rgba(255,212,0,.28);
+      border:1px solid rgba(11,15,23,.10);
+      color:var(--ink);
+      font-weight:700;
+      letter-spacing:.2px;
+    }
+    .miniLinks{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .miniLinks a{
       padding:8px 10px;
       border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.05);
-      color:var(--text);
-      font-weight:800;
-      font-size:12px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.65);
+      font-weight:700;
     }
-    .mini:hover{border-color:rgba(255,255,255,.22)}
+    .miniLinks a:hover{background:rgba(11,15,23,.03)}
 
-    /* Header / nav */
+    /* Header */
     header{
-      position: sticky;
-      top:0;
-      z-index:50;
-      background: rgba(7,10,16,.68);
+      position:sticky; top:0; z-index:50;
+      background: rgba(255,255,255,.82);
       backdrop-filter: blur(10px);
-      border-bottom:1px solid rgba(255,255,255,.10);
+      border-bottom:1px solid var(--line);
     }
     .head{
       max-width:var(--max);
       margin:0 auto;
-      padding:12px 18px;
+      padding:14px 18px;
       display:flex;
-      gap:14px;
-      align-items:center;
       justify-content:space-between;
+      align-items:center;
+      gap:14px;
       flex-wrap:wrap;
     }
     .brand{
@@ -100,180 +107,287 @@
       gap:10px;
       min-width:240px;
     }
-    .logo{
-      width:42px;height:42px;border-radius:14px;
-      background: linear-gradient(135deg, var(--brand), var(--accent));
-      box-shadow: var(--shadow);
+    .mark{
+      width:40px;height:40px;border-radius:14px;
+      background: radial-gradient(14px 14px at 35% 35%, #fff 0 40%, transparent 41%),
+                  linear-gradient(135deg, var(--ink), #202a3e);
+      box-shadow: 0 10px 28px rgba(11,15,23,.18);
+      position:relative;
+      overflow:hidden;
     }
-    .brand .name{font-weight:900; letter-spacing:.2px}
-    .brand .sub{font-size:12px;color:var(--muted)}
-    nav{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+    .mark:after{
+      content:"";
+      position:absolute; inset:-30%;
+      background: conic-gradient(from 210deg, rgba(255,212,0,.0), rgba(255,212,0,.65), rgba(255,212,0,.0));
+      transform: rotate(15deg);
+      opacity:.8;
+    }
+    .brandTitle{font-weight:800; letter-spacing:.2px}
+    .brandSub{font-size:12px;color:var(--muted)}
+    nav{display:flex; gap:10px; flex-wrap:wrap; justify-content:center}
     nav a{
       padding:9px 12px;
       border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
+      border:1px solid transparent;
       color:var(--muted);
+      font-weight:600;
       font-size:13px;
-      transition:.12s;
     }
-    nav a:hover{color:var(--text);border-color:rgba(255,255,255,.22)}
-    .cta{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+    nav a:hover{border-color:var(--line); color:var(--ink); background: rgba(11,15,23,.03)}
+    .cta{display:flex; gap:10px; flex-wrap:wrap}
     .btn{
       display:inline-flex;
       align-items:center;
       justify-content:center;
+      gap:8px;
       padding:11px 14px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.12);
-      font-weight:900;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: #fff;
+      font-weight:800;
       letter-spacing:.2px;
+      cursor:pointer;
+      transition: transform .08s ease, box-shadow .12s ease;
+      box-shadow: 0 10px 30px rgba(11,15,23,.06);
       user-select:none;
-      transition: transform .08s ease;
-      min-width:150px;
+      min-width:130px;
     }
     .btn:active{transform:scale(.98)}
     .btn.primary{
-      background: linear-gradient(135deg, var(--brand2), rgba(34,197,94,.75));
-      color:#05210f;
-      border-color: rgba(34,197,94,.35);
+      background: var(--ink);
+      color:#fff;
+      border-color: rgba(11,15,23,.22);
     }
-    .btn.alt{
-      background: rgba(109,94,252,.16);
-      border-color: rgba(109,94,252,.45);
+    .btn.accent{
+      background: var(--accent);
+      color: var(--ink);
+      border-color: rgba(11,15,23,.14);
     }
-    .btn.ghost{
-      background: rgba(255,255,255,.06);
-    }
+
     @media (max-width: 980px){
       nav{display:none}
     }
 
-    /* Cards / sections */
-    .card{
-      background: var(--card);
-      border:1px solid rgba(255,255,255,.12);
-      border-radius: var(--r);
-      box-shadow: var(--shadow);
-    }
+    /* Hero (Toyokoh-like big type + scroll cue) */
     .hero{
-      padding:18px 0 8px;
+      padding:56px 0 22px;
+      position:relative;
+    }
+    .heroGrid{
       display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap:14px;
+      grid-template-columns: 1.25fr .75fr;
+      gap:18px;
       align-items:stretch;
     }
-    @media (max-width: 980px){ .hero{grid-template-columns:1fr} }
+    @media (max-width: 980px){
+      .hero{padding:36px 0 14px}
+      .heroGrid{grid-template-columns:1fr}
+    }
 
-    .heroMain{padding:22px}
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:8px 12px;
-      border-radius:999px;
-      border:1px solid rgba(0,212,255,.35);
-      background: rgba(0,212,255,.08);
-      color:#bff6ff;
+    .kicker{
       font-weight:800;
-      font-size:13px;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      font-size:12px;
+      color:var(--muted);
+      margin-bottom:12px;
     }
     h1{
-      margin:12px 0 10px;
-      font-size:44px;
-      line-height:1.05;
-      word-break: break-word;
+      margin:0;
+      font-size: clamp(40px, 4.5vw, 72px);
+      line-height:1.02;
+      letter-spacing:-.04em;
     }
-    @media (max-width: 520px){ h1{font-size:34px} }
-    .lead{margin:0;color:var(--muted);font-size:16px}
-    .quickRow{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-    .kpis{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-    .kpis span{
-      padding:8px 10px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.14);
+    .heroP{
+      margin:14px 0 0;
       color:var(--muted);
-      font-size:13px;
+      font-size:16px;
+      max-width:60ch;
     }
-
-    .heroSide{padding:18px}
-    .heroSide h3{margin:0 0 8px}
-    .small{margin:0;color:var(--muted);font-size:12px}
-    form{display:grid;gap:10px;margin-top:10px}
-    input, select, textarea{
-      width:100%;
-      padding:12px 12px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.22);
-      color:var(--text);
-      outline:none;
-    }
-    textarea{min-height:92px; resize:vertical}
-    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-    @media (max-width: 520px){ .grid2{grid-template-columns:1fr} }
-
-    .section{padding:14px 0}
-    .titleRow{
+    .heroActions{
       display:flex;
-      justify-content:space-between;
-      align-items:flex-end;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:18px;
+    }
+
+    .heroCard{
+      border:1px solid var(--line);
+      border-radius: var(--r);
+      background:
+        radial-gradient(900px 300px at 10% 0%, rgba(255,212,0,.20), transparent 55%),
+        radial-gradient(700px 300px at 100% 60%, rgba(43,89,255,.10), transparent 55%),
+        rgba(11,15,23,.02);
+      box-shadow: var(--shadow);
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+    }
+    .heroCard:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: linear-gradient(120deg, rgba(255,212,0,.0), rgba(255,212,0,.18), rgba(255,255,255,0));
+      pointer-events:none;
+    }
+    .statRow{
+      display:grid;
+      grid-template-columns:1fr 1fr;
       gap:12px;
       margin-top:10px;
     }
-    .titleRow h2{margin:0;font-size:22px}
-    .titleRow p{margin:0;color:var(--muted)}
-    .cards{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:14px;
-      margin-top:12px;
+    .stat{
+      border:1px solid rgba(11,15,23,.10);
+      background: rgba(255,255,255,.65);
+      border-radius: 16px;
+      padding:12px;
     }
-    @media (max-width: 980px){ .cards{grid-template-columns:1fr} }
-    .item{padding:16px}
-    .item h4{margin:0 0 6px;font-size:16px}
-    .item p{margin:0;color:var(--muted);font-size:14px}
-    .tag{
-      display:inline-flex;
-      margin-top:10px;
-      padding:7px 10px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(109,94,252,.12);
-      color:#d7d3ff;
-      font-weight:900;
+    .stat b{display:block}
+    .stat span{font-size:12px;color:var(--muted)}
+    .heroCard .small{
+      margin-top:12px;
+      color:var(--muted);
       font-size:12px;
     }
 
-    .banner{
-      margin-top:14px;
-      padding:16px;
-      border-radius: var(--r);
-      border:1px solid rgba(255,255,255,.12);
-      background:
-        linear-gradient(135deg, rgba(109,94,252,.18), rgba(0,212,255,.08), rgba(34,197,94,.12));
+    .scrollCue{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-top:26px;
+      color:var(--muted);
+      font-size:12px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
     }
-    .banner b{display:block;margin-bottom:6px}
-    .banner p{margin:0;color:var(--muted)}
+    .mouse{
+      width:22px;height:34px;border-radius:999px;
+      border:1px solid rgba(11,15,23,.22);
+      position:relative;
+      background: rgba(255,255,255,.5);
+    }
+    .mouse:after{
+      content:"";
+      width:4px;height:7px;border-radius:999px;
+      background: rgba(11,15,23,.45);
+      position:absolute; left:50%; top:7px;
+      transform:translateX(-50%);
+      animation: wheel 1.2s infinite ease-in-out;
+    }
+    @keyframes wheel{
+      0%{opacity:.1; transform:translate(-50%,0)}
+      50%{opacity:.9; transform:translate(-50%,6px)}
+      100%{opacity:.1; transform:translate(-50%,0)}
+    }
+
+    /* Sections (big spaced headings like Toyokoh) */
+    section.block{padding:64px 0; border-top:1px solid var(--line)}
+    .secHead{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-bottom:18px;
+    }
+    .secLabel{
+      font-weight:800;
+      letter-spacing:.26em;
+      text-transform:uppercase;
+      font-size:12px;
+      color:var(--muted);
+    }
+    .secTitle{
+      font-size: clamp(26px, 2.6vw, 42px);
+      letter-spacing:-.03em;
+      margin:8px 0 0;
+    }
+    .secDesc{margin:0; color:var(--muted); max-width:60ch}
+
+    .grid3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+      margin-top:18px;
+    }
+    @media (max-width: 980px){ .grid3{grid-template-columns:1fr} }
+
+    .card{
+      border:1px solid var(--line);
+      border-radius: var(--r);
+      background: #fff;
+      box-shadow: 0 18px 55px rgba(11,15,23,.06);
+      padding:18px;
+    }
+    .card h3{margin:0 0 8px; letter-spacing:-.02em}
+    .card p{margin:0; color:var(--muted)}
+    .tag{
+      display:inline-flex;
+      margin-top:12px;
+      padding:8px 10px;
+      border-radius:999px;
+      background: rgba(255,212,0,.22);
+      border:1px solid rgba(11,15,23,.10);
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+
+    /* “Image” panels (no copied images—just premium shapes) */
+    .panel{
+      border:1px solid var(--line);
+      border-radius: var(--r);
+      overflow:hidden;
+      background:
+        linear-gradient(120deg, rgba(11,15,23,.92), rgba(11,15,23,.78)),
+        radial-gradient(900px 450px at 30% 10%, rgba(255,212,0,.40), transparent 55%),
+        radial-gradient(800px 450px at 80% 70%, rgba(43,89,255,.18), transparent 55%);
+      color:#fff;
+      box-shadow: 0 30px 80px rgba(11,15,23,.20);
+      padding:22px;
+      position:relative;
+      min-height:220px;
+    }
+    .panel .k{letter-spacing:.26em;text-transform:uppercase;font-size:12px;color:rgba(255,255,255,.72);font-weight:800}
+    .panel h3{margin:10px 0 10px; font-size:26px; letter-spacing:-.02em}
+    .panel p{margin:0; color:rgba(255,255,255,.78); max-width:60ch}
+    .panel .bar{
+      position:absolute; right:-60px; bottom:-60px;
+      width:220px; height:220px; border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,212,0,.95), rgba(255,212,0,.0) 60%);
+      filter: blur(0.2px);
+      opacity:.9;
+    }
+
+    /* Quote form */
+    form{display:grid; gap:10px; margin-top:14px}
+    .grid2{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+    @media (max-width: 620px){ .grid2{grid-template-columns:1fr} }
+    input, select, textarea{
+      width:100%;
+      padding:12px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(11,15,23,.16);
+      background: rgba(11,15,23,.02);
+      outline:none;
+      font: inherit;
+    }
+    textarea{min-height:110px; resize:vertical}
 
     footer{
-      margin-top:18px;
-      padding:18px 0 34px;
-      border-top:1px solid rgba(255,255,255,.12);
+      border-top:1px solid var(--line);
+      padding:26px 0 40px;
       color:var(--muted);
       font-size:13px;
     }
-    .footGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    @media (max-width: 900px){ .footGrid{grid-template-columns:1fr} }
 
-    /* mobile sticky bar */
+    /* Mobile sticky bar */
     .sticky{
-      position:fixed;
-      left:0; right:0; bottom:0;
+      position:fixed; left:0; right:0; bottom:0;
       padding:10px 14px;
-      background: rgba(7,10,16,.78);
+      background: rgba(255,255,255,.86);
       backdrop-filter: blur(10px);
-      border-top:1px solid rgba(255,255,255,.12);
+      border-top:1px solid var(--line);
       display:none;
       z-index:60;
     }
@@ -292,23 +406,23 @@
 </head>
 
 <body>
-  <!-- EDIT THESE -->
+  <!-- EDIT THESE (your business info) -->
   <script>
     const BRAND = "TheMobileTire";
     const PHONE_DISPLAY = "(647) 920-2080";
     const PHONE_TEL = "+16479202080";
     const SERVICE_AREA = "GTA + Durham Region";
-    const QUOTE_EMAIL = "mirzaartslan@gmail.com"; // change if needed
+    const QUOTE_EMAIL = "mirzaartslan@gmail.com";
   </script>
 
-  <!-- top phone strip -->
   <div class="topbar">
     <div class="inner">
-      <div>📞 Call/Text: <b id="phoneTopText"></b> • <span id="areaTopText"></span></div>
-      <div class="miniBtns">
-        <a class="mini" id="callMini" href="#">Call Now</a>
-        <a class="mini" id="textMini" href="#">Text</a>
-        <a class="mini" href="#quote">Get Quote</a>
+      <div class="badge">Mobile Tire Service — We come to you</div>
+      <div class="miniLinks">
+        <span class="muted">Call/Text: <b id="topPhone"></b></span>
+        <a id="topCall" href="#">Call</a>
+        <a id="topText" href="#">Text</a>
+        <a href="#quote">Get Quote</a>
       </div>
     </div>
   </div>
@@ -316,250 +430,307 @@
   <header>
     <div class="head">
       <a class="brand" href="#top">
-        <div class="logo" aria-hidden="true"></div>
+        <div class="mark" aria-hidden="true"></div>
         <div>
-          <div class="name" id="brandName">TheMobileTire</div>
-          <div class="sub">Mobile tire shop • We come to you</div>
+          <div class="brandTitle" id="brandTitle">TheMobileTire</div>
+          <div class="brandSub">Premium mobile tire shop • <span id="areaSub"></span></div>
         </div>
       </a>
 
       <nav aria-label="primary">
         <a href="#services">Services</a>
-        <a href="#how">How it works</a>
-        <a href="#areas">Service area</a>
-        <a href="#quote">Book / Quote</a>
+        <a href="#process">Process</a>
+        <a href="#areas">Service Area</a>
+        <a href="#quote">Quote</a>
         <a href="#contact">Contact</a>
       </nav>
 
       <div class="cta">
-        <a class="btn primary" id="callTop" href="#">📞 Call</a>
-        <a class="btn alt" id="textTop" href="#">💬 Text</a>
+        <a class="btn accent" id="callBtn" href="#">📞 Call</a>
+        <a class="btn primary" id="textBtn" href="#">💬 Text</a>
       </div>
     </div>
   </header>
 
-  <main class="wrap" id="top">
+  <main id="top">
     <section class="hero">
-      <div class="card heroMain">
-        <div class="pill">🚗 Mobile Tire Service — We Come To You</div>
-        <h1><span id="brandHero">TheMobileTire</span></h1>
-        <p class="lead">
-          Tire swaps, flat repairs, mounting & balancing, TPMS, valve stems, tires & rims — without the shop visit.
-          Book fast by call/text.
-        </p>
-
-        <div class="quickRow">
-          <a class="btn primary" id="callHero" href="#">📞 Call <span id="phoneHero" style="margin-left:8px"></span></a>
-          <a class="btn alt" id="textHero" href="#">💬 Text for a Quote</a>
-          <a class="btn ghost" href="#quote">✅ Book / Quote</a>
-        </div>
-
-        <div class="kpis">
-          <span>✅ Home / Work / Roadside</span>
-          <span>✅ Same-day when available</span>
-          <span>✅ Clean & professional</span>
-          <span>✅ Cash / eTransfer</span>
-        </div>
-
-        <div class="banner">
-          <b>Order tires + install at your location</b>
-          <p>Tell us your tire size (ex: 225/65R17) and we’ll send options, then install wherever you are.</p>
-        </div>
-      </div>
-
-      <aside class="card heroSide" id="quote">
-        <h3>Book / Get a Quote</h3>
-        <p class="small">This creates an email you can send instantly. For fastest response, text us.</p>
-
-        <form onsubmit="return sendQuoteEmail(event)">
-          <div class="grid2">
-            <input id="name" required placeholder="Full name">
-            <input id="phone" required placeholder="Phone number">
-          </div>
-
-          <div class="grid2">
-            <input id="city" required placeholder="City / Area (e.g., Oshawa)">
-            <select id="service" required>
-              <option value="" disabled selected>Select service</option>
-              <option>On-rim tire swap (seasonal)</option>
-              <option>Flat tire repair</option>
-              <option>Mount & balance (off-rim)</option>
-              <option>Wheel balancing</option>
-              <option>TPMS reset / service</option>
-              <option>Valve stem replacement</option>
-              <option>New / used tires</option>
-              <option>Rims / rim repair</option>
-              <option>Other</option>
-            </select>
-          </div>
-
-          <input id="tiresize" placeholder="Tire size (optional) (e.g., 225/65R17)">
-          <textarea id="details" placeholder="Details (how many tires, where you are, preferred time)"></textarea>
-
-          <button class="btn primary" type="submit">Send Quote Request</button>
-          <div class="small">Or text us now: <a id="textInline" href="#"><u>Tap here</u></a></div>
-        </form>
-      </aside>
-    </section>
-
-    <section class="section" id="services">
-      <div class="titleRow">
-        <h2>Services</h2>
-        <p>Complete mobile tire shop — we come to you.</p>
-      </div>
-
-      <div class="cards">
-        <div class="card item">
-          <h4>Tire Installation (Mobile)</h4>
-          <p>Order tires and get them installed at your location — no shop visit.</p>
-          <div class="tag">Popular</div>
-        </div>
-        <div class="card item">
-          <h4>Flat Tire Repair</h4>
-          <p>Spare swap, air top-up, patch repairs (when safe), or replacement options.</p>
-          <div class="tag">Fast help</div>
-        </div>
-        <div class="card item">
-          <h4>Mount & Balance</h4>
-          <p>Mounting and balancing for a smoother ride and less tire wear.</p>
-          <div class="tag">Smooth ride</div>
-        </div>
-      </div>
-
-      <div class="cards">
-        <div class="card item">
-          <h4>TPMS Reset / Service</h4>
-          <p>We reset/service TPMS where applicable after installs and swaps.</p>
-          <div class="tag">TPMS</div>
-        </div>
-        <div class="card item">
-          <h4>Valve Stem Replacement</h4>
-          <p>Fix leaks without waiting around at a repair shop.</p>
-          <div class="tag">Stops leaks</div>
-        </div>
-        <div class="card item">
-          <h4>Tires & Rims</h4>
-          <p>New/used tires, alloy & steel rims — ask for options by size and budget.</p>
-          <div class="tag">Deals</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="how">
-      <div class="titleRow">
-        <h2>How it works</h2>
-        <p>Simple 3-step booking.</p>
-      </div>
-
-      <div class="cards">
-        <div class="card item">
-          <h4>1) Call or Text</h4>
-          <p>Send your location + tire size + what you need. Fastest response by text.</p>
-        </div>
-        <div class="card item">
-          <h4>2) Pick a time</h4>
-          <p>We confirm availability and give you a price range before we come out.</p>
-        </div>
-        <div class="card item">
-          <h4>3) We come to you</h4>
-          <p>Home, workplace, or roadside — professional service and you’re back on the road.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="areas">
-      <div class="titleRow">
-        <h2>Service area</h2>
-        <p id="areaLine">Serving GTA + Durham Region</p>
-      </div>
-
-      <div class="cards">
-        <div class="card item">
-          <h4>Durham</h4>
-          <p>Bowmanville • Oshawa • Whitby • Ajax • Pickering</p>
-        </div>
-        <div class="card item">
-          <h4>GTA</h4>
-          <p>Toronto • Scarborough • North York • Markham • Vaughan</p>
-        </div>
-        <div class="card item">
-          <h4>Outside area?</h4>
-          <p>Text your city — we may still come with a travel fee depending on schedule.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="contact">
-      <div class="card" style="padding:18px">
-        <div class="titleRow" style="margin:0">
-          <h2 style="margin:0">Need help now?</h2>
-          <p style="margin:0">Call or text — quickest way to lock a spot.</p>
-        </div>
-
-        <div class="cta" style="justify-content:flex-start;margin-top:12px">
-          <a class="btn primary" id="callBottom" href="#">📞 Call <span id="phoneBottom" style="margin-left:8px"></span></a>
-          <a class="btn alt" id="textBottom" href="#">💬 Text</a>
-          <a class="btn ghost" href="#quote">✅ Book / Quote</a>
-        </div>
-      </div>
-
-      <footer>
-        <div class="footGrid">
+      <div class="wrap">
+        <div class="heroGrid">
           <div>
-            <b id="brandFoot">TheMobileTire</b><br/>
-            Phone: <a id="callFoot" href="#"><u id="phoneFoot"></u></a><br/>
-            Text: <a id="textFoot" href="#"><u>Text now</u></a><br/>
-            <span class="small">Serving <span id="areaFoot"></span></span>
+            <div class="kicker">N e x t  M o b i l e  T i r e  S e r v i c e</div>
+            <h1>
+              Mobile tire service,<br/>
+              <span class="thin">delivered to your driveway.</span>
+            </h1>
+            <p class="heroP">
+              Tire swaps • flat repairs • mounting & balancing • TPMS — done at your home, work, or roadside.
+              Fast booking by call or text.
+            </p>
+
+            <div class="heroActions">
+              <a class="btn accent" id="heroCall" href="#">📞 Call <span id="heroPhone"></span></a>
+              <a class="btn primary" id="heroText" href="#">💬 Text for a Quote</a>
+              <a class="btn" href="#quote">✅ Get Quote</a>
+            </div>
+
+            <div class="scrollCue" aria-hidden="true">
+              <div class="mouse"></div>
+              <div>Scroll Down</div>
+            </div>
           </div>
-          <div class="small">
-            Pricing varies by tire size and situation. Flat repairs depend on puncture location and safety.
-            © <span id="year"></span> <span id="brandCopy"></span>
+
+          <aside class="heroCard">
+            <div class="kicker" style="margin:0 0 10px">Quick booking</div>
+            <div class="statRow">
+              <div class="stat">
+                <b>Same-day</b>
+                <span>When available</span>
+              </div>
+              <div class="stat">
+                <b>Clean & Pro</b>
+                <span>Tools + torque specs</span>
+              </div>
+              <div class="stat">
+                <b>Home / Work</b>
+                <span>Parking lot friendly</span>
+              </div>
+              <div class="stat">
+                <b>Pay easy</b>
+                <span>Cash / eTransfer</span>
+              </div>
+            </div>
+            <div class="small">
+              Serving <b id="heroArea"></b>. Text your tire size (ex: 225/65R17) + location for fastest quote.
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="services">
+      <div class="wrap">
+        <div class="secHead">
+          <div>
+            <div class="secLabel">(Services)</div>
+            <h2 class="secTitle">A complete mobile tire shop.</h2>
+          </div>
+          <p class="secDesc">Everything you’d get at a shop—without the waiting room.</p>
+        </div>
+
+        <div class="grid3">
+          <div class="card">
+            <h3>Seasonal Tire Swaps</h3>
+            <p>On-rim changeovers at your home or workplace. Quick, clean, and organized.</p>
+            <div class="tag">Most Popular</div>
+          </div>
+          <div class="card">
+            <h3>Flat Tire Help</h3>
+            <p>Spare swap, air top-up, repair (when safe), or replacement options by size.</p>
+            <div class="tag">Fast Help</div>
+          </div>
+          <div class="card">
+            <h3>Mount & Balance</h3>
+            <p>Off-rim mounting + balancing for a smoother ride and better tire life.</p>
+            <div class="tag">Smooth Ride</div>
           </div>
         </div>
-      </footer>
+
+        <div class="grid3">
+          <div class="card">
+            <h3>TPMS Service</h3>
+            <p>TPMS resets/service where supported—after swaps or installs.</p>
+            <div class="tag">TPMS</div>
+          </div>
+          <div class="card">
+            <h3>Valve Stems</h3>
+            <p>Replace leaking valve stems and stop slow leaks the right way.</p>
+            <div class="tag">Stops Leaks</div>
+          </div>
+          <div class="card">
+            <h3>Tires & Rims</h3>
+            <p>New/used tires and rims—tell us your size and budget for options.</p>
+            <div class="tag">Options</div>
+          </div>
+        </div>
+      </div>
     </section>
+
+    <section class="block" id="process">
+      <div class="wrap">
+        <div class="secHead">
+          <div>
+            <div class="secLabel">(Process)</div>
+            <h2 class="secTitle">Book in minutes.</h2>
+          </div>
+          <p class="secDesc">Simple steps, premium service.</p>
+        </div>
+
+        <div class="panel">
+          <div class="k">Beautifully simple</div>
+          <h3>Text your size + location → get a quote → we come to you.</h3>
+          <p>
+            Send your tire size (ex: 225/65R17), your city, and what you need.
+            We confirm a time window and show up ready.
+          </p>
+          <div class="bar"></div>
+        </div>
+
+        <div class="grid3" style="margin-top:14px">
+          <div class="card">
+            <h3>1) Message us</h3>
+            <p>Text your size, location, and service type.</p>
+          </div>
+          <div class="card">
+            <h3>2) Confirm time</h3>
+            <p>We lock in your time window and price range.</p>
+          </div>
+          <div class="card">
+            <h3>3) Done on-site</h3>
+            <p>Professional install/repair—then you’re back on the road.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="areas">
+      <div class="wrap">
+        <div class="secHead">
+          <div>
+            <div class="secLabel">(Service Area)</div>
+            <h2 class="secTitle">We come to you across <span id="areaTitle"></span>.</h2>
+          </div>
+          <p class="secDesc">Ask about travel fees outside the main zone.</p>
+        </div>
+
+        <div class="grid3">
+          <div class="card">
+            <h3>Durham</h3>
+            <p>Bowmanville • Oshawa • Whitby • Ajax • Pickering</p>
+          </div>
+          <div class="card">
+            <h3>GTA</h3>
+            <p>Toronto • Scarborough • North York • Markham • Vaughan</p>
+          </div>
+          <div class="card">
+            <h3>Outside area?</h3>
+            <p>Text your city—if we can fit it, we’ll make it happen.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="quote">
+      <div class="wrap">
+        <div class="secHead">
+          <div>
+            <div class="secLabel">(Quote)</div>
+            <h2 class="secTitle">Get a quote fast.</h2>
+          </div>
+          <p class="secDesc">This sends a ready-to-go email or you can text for the fastest response.</p>
+        </div>
+
+        <div class="grid3" style="grid-template-columns: 1.1fr .9fr .9fr;">
+          <div class="card" style="grid-column: 1 / span 2;">
+            <h3>Quote request</h3>
+            <p class="muted">Fill this out and it will open your email app with the message pre-written.</p>
+
+            <form onsubmit="return sendQuoteEmail(event)">
+              <div class="grid2">
+                <input id="q_name" required placeholder="Full name">
+                <input id="q_phone" required placeholder="Phone number">
+              </div>
+              <div class="grid2">
+                <input id="q_city" required placeholder="City / Area (e.g., Oshawa)">
+                <select id="q_service" required>
+                  <option value="" disabled selected>Select service</option>
+                  <option>Seasonal tire swap (on-rim)</option>
+                  <option>Flat tire repair</option>
+                  <option>Mount & balance (off-rim)</option>
+                  <option>Wheel balancing</option>
+                  <option>TPMS reset / service</option>
+                  <option>Valve stem replacement</option>
+                  <option>New / used tires</option>
+                  <option>Rims / rim repair</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <input id="q_size" placeholder="Tire size (optional) (e.g., 225/65R17)">
+              <textarea id="q_details" placeholder="Details (how many tires, where you are, preferred time)"></textarea>
+
+              <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:2px">
+                <button class="btn accent" type="submit">Send Email Quote</button>
+                <a class="btn primary" id="quoteTextBtn" href="#">Text for Fast Quote</a>
+              </div>
+            </form>
+          </div>
+
+          <div class="card" id="contact">
+            <h3>Contact</h3>
+            <p class="muted">Fastest: text your size + location.</p>
+            <div style="margin-top:12px; display:grid; gap:10px">
+              <a class="btn accent" id="callBottom" href="#">📞 Call <span id="bottomPhone"></span></a>
+              <a class="btn primary" id="textBottom" href="#">💬 Text</a>
+              <a class="btn" href="#services">View Services</a>
+            </div>
+            <p class="muted" style="margin-top:12px;font-size:12px">
+              Pricing depends on tire size + situation. Repairs depend on puncture location and safety.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap">
+        <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:flex-end">
+          <div>
+            <b id="footBrand">TheMobileTire</b><br/>
+            <span class="muted">Serving <span id="footArea"></span></span>
+          </div>
+          <div class="muted">© <span id="year"></span> <span id="footBrand2"></span></div>
+        </div>
+      </div>
+    </footer>
   </main>
 
   <div class="sticky">
     <div class="bar">
-      <a class="btn primary" id="callSticky" href="#">📞 Call</a>
-      <a class="btn alt" id="textSticky" href="#">💬 Text</a>
+      <a class="btn accent" id="stickyCall" href="#">📞 Call</a>
+      <a class="btn primary" id="stickyText" href="#">💬 Text</a>
     </div>
   </div>
 
   <script>
-    // Apply brand + links
-    document.getElementById("brandName").textContent = BRAND;
-    document.getElementById("brandHero").textContent = BRAND;
-    document.getElementById("brandFoot").textContent = BRAND;
-    document.getElementById("brandCopy").textContent = BRAND;
+    // Apply business info
+    document.getElementById("brandTitle").textContent = BRAND;
+    document.getElementById("footBrand").textContent = BRAND;
+    document.getElementById("footBrand2").textContent = BRAND;
 
-    document.getElementById("phoneTopText").textContent = PHONE_DISPLAY;
-    document.getElementById("phoneHero").textContent = PHONE_DISPLAY;
-    document.getElementById("phoneBottom").textContent = PHONE_DISPLAY;
-    document.getElementById("phoneFoot").textContent = PHONE_DISPLAY;
+    document.getElementById("topPhone").textContent = PHONE_DISPLAY;
+    document.getElementById("heroPhone").textContent = PHONE_DISPLAY;
+    document.getElementById("bottomPhone").textContent = PHONE_DISPLAY;
 
-    document.getElementById("areaTopText").textContent = SERVICE_AREA;
-    document.getElementById("areaLine").textContent = "Serving " + SERVICE_AREA;
-    document.getElementById("areaFoot").textContent = SERVICE_AREA;
+    document.getElementById("areaSub").textContent = SERVICE_AREA;
+    document.getElementById("heroArea").textContent = SERVICE_AREA;
+    document.getElementById("areaTitle").textContent = SERVICE_AREA;
+    document.getElementById("footArea").textContent = SERVICE_AREA;
 
     const tel = "tel:" + PHONE_TEL;
     const sms = "sms:" + PHONE_TEL;
 
-    ["callMini","callTop","callHero","callBottom","callFoot","callSticky"].forEach(id => document.getElementById(id).href = tel);
-    ["textMini","textTop","textHero","textBottom","textFoot","textSticky","textInline"].forEach(id => document.getElementById(id).href = sms);
+    ["topCall","callBtn","heroCall","callBottom","stickyCall"].forEach(id => document.getElementById(id).href = tel);
+    ["topText","textBtn","heroText","textBottom","stickyText","quoteTextBtn"].forEach(id => document.getElementById(id).href = sms);
 
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Quote form -> mailto
     function sendQuoteEmail(e){
       e.preventDefault();
-      const name = document.getElementById("name").value.trim();
-      const phone = document.getElementById("phone").value.trim();
-      const city = document.getElementById("city").value.trim();
-      const service = document.getElementById("service").value;
-      const tiresize = document.getElementById("tiresize").value.trim();
-      const details = document.getElementById("details").value.trim();
+      const name = document.getElementById("q_name").value.trim();
+      const phone = document.getElementById("q_phone").value.trim();
+      const city = document.getElementById("q_city").value.trim();
+      const service = document.getElementById("q_service").value;
+      const size = document.getElementById("q_size").value.trim();
+      const details = document.getElementById("q_details").value.trim();
 
       const subject = `Quote Request - ${service} - ${city}`;
       const body =
@@ -569,7 +740,7 @@ Name: ${name}
 Phone: ${phone}
 City/Area: ${city}
 Service: ${service}
-Tire Size: ${tiresize}
+Tire Size: ${size}
 
 Details:
 ${details}
@@ -582,4 +753,3 @@ ${details}
   </script>
 </body>
 </html>
-
