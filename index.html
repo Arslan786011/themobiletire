@@ -28,7 +28,7 @@
     .video-container video { width: 100%; height: 100%; object-fit: cover; opacity: 0.45; }
     .vignette { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, transparent 10%, var(--bg) 95%); z-index: -1; }
 
-    /* Ticker */
+    /* Top Ticker */
     .ticker-wrap { position: fixed; top: 0; width: 100%; z-index: 2000; background: rgba(0,0,0,0.95); backdrop-filter: blur(15px); border-bottom: 1px solid var(--glass-border); padding: 10px 0; font-size: 10px; font-weight: 800; letter-spacing: 2px; color: var(--cyan); text-transform: uppercase; }
     .ticker-move { display: inline-block; white-space: nowrap; animation: ticker-kf 35s linear infinite; }
     .ticker-move span { padding-right: 50px; }
@@ -36,7 +36,7 @@
 
     /* Container & Hero */
     .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-    .hero { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 120px 20px 40px; }
+    .hero { min-height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 120px 20px 40px; }
     .hero h1 { font-size: clamp(3.2rem, 15vw, 7.5rem); font-weight: 800; letter-spacing: -3px; line-height: 0.85; margin-bottom: 25px; }
     .hero h1 span { color: var(--cyan); text-shadow: 0 0 30px rgba(0, 242, 255, 0.5); }
     .hero p { max-width: 600px; color: var(--text-dim); font-size: 17px; line-height: 1.6; }
@@ -47,20 +47,22 @@
     .phone { background: #22c55e; animation: pulse-green 2s infinite; }
     .whatsapp { background: #25D366; }
     .quote-link { background: var(--cyan); color: #000; border-radius: 50px; width: auto; height: 55px; padding: 0 25px; font-weight: 800; font-size: 12px; text-transform: uppercase; }
-
     @keyframes pulse-green { 0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(34, 197, 94, 0); } 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); } }
 
-    /* Brighter Tech Panels */
+    /* Service Cards */
     .tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin: 60px 0; }
     .tech-card { background: var(--glass); border: 1px solid var(--glass-border); padding: 40px; border-radius: 20px; backdrop-filter: blur(25px); }
     .tech-card h3 { font-size: 1.3rem; margin-bottom: 15px; color: var(--cyan); text-transform: uppercase; }
     .tech-card p { color: var(--text-dim); line-height: 1.5; }
 
-    /* Reviews */
-    .review-section { padding-bottom: 150px; }
-    .review-card { background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); padding: 30px; border-radius: 20px; margin-bottom: 20px; }
-    .stars { color: #facc15; margin-bottom: 15px; font-size: 1.1rem; }
-    .reviewer { font-weight: 800; font-size: 12px; color: var(--cyan); text-transform: uppercase; margin-top: 15px; display: block; }
+    /* Infinite Review Slider */
+    .review-container { width: 100%; overflow: hidden; padding: 60px 0; background: rgba(0,0,0,0.3); border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border); margin-bottom: 100px; }
+    .review-track { display: flex; width: calc(350px * 10); animation: scroll-reviews 40s linear infinite; }
+    .review-track:hover { animation-play-state: paused; }
+    .review-card { width: 350px; flex-shrink: 0; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); padding: 30px; border-radius: 20px; margin: 0 15px; }
+    .stars { color: #facc15; margin-bottom: 10px; font-size: 0.9rem; }
+    .reviewer { font-weight: 800; font-size: 11px; color: var(--cyan); text-transform: uppercase; margin-top: 15px; display: block; }
+    @keyframes scroll-reviews { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-350px * 5)); } }
 
     input, textarea { width: 100%; background: rgba(255,255,255,0.1); border: 1px solid var(--glass-border); padding: 20px; border-radius: 15px; color: #fff; margin-bottom: 20px; font-family: inherit; font-size: 16px; }
   </style>
@@ -112,7 +114,53 @@
       </div>
     </div>
 
-    <section id="quote" style="padding-top: 50px;">
+    <div class="review-container">
+      <h2 style="text-align: center; margin-bottom: 40px; font-size: 1rem; letter-spacing: 4px; color: #fff;">LATEST CLIENT LOGS</h2>
+      <div class="review-track">
+        <div class="review-card">
+          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p>"Saved me on the 401. Arrived in 35 mins. Professional and fast."</p>
+          <span class="reviewer">Jason M. • Verified</span>
+        </div>
+        <div class="review-card">
+          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p>"The only way to do tire swaps. They came to my office. 10/10."</p>
+          <span class="reviewer">Sarah L. • Verified</span>
+        </div>
+        <div class="review-card">
+          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p>"Best pricing in Durham. No shop wait times anymore."</p>
+          <span class="reviewer">Chris T. • Verified</span>
+        </div>
+        <div class="review-card">
+          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p>"Super clean setup in their van. Balanced my off-rim tires perfectly."</p>
+          <span class="reviewer">Aman S. • Verified</span>
+        </div>
+        <div class="review-card">
+          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p>"Highly recommend for flat repairs. Very honest and skilled."</p>
+          <span class="reviewer">Elena D. • Verified</span>
+        </div>
+        <div class="review-card">
+          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p>"Saved me on the 401. Arrived in 35 mins. Professional and fast."</p>
+          <span class="reviewer">Jason M. • Verified</span>
+        </div>
+        <div class="review-card">
+          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p>"The only way to do tire swaps. They came to my office. 10/10."</p>
+          <span class="reviewer">Sarah L. • Verified</span>
+        </div>
+        <div class="review-card">
+          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p>"Best pricing in Durham. No shop wait times anymore."</p>
+          <span class="reviewer">Chris T. • Verified</span>
+        </div>
+      </div>
+    </div>
+
+    <section id="quote">
       <div class="tech-card" style="max-width: 650px; margin: 0 auto; background: rgba(255,255,255,0.2);" data-aos="zoom-in">
         <h3 style="text-align: center; margin-bottom: 35px;">Service Deployment Request</h3>
         <form onsubmit="sendEmail(event)">
@@ -124,26 +172,15 @@
       </div>
     </section>
 
-    <section class="review-section" style="margin-top: 100px;">
-      <h2 style="text-align: center; margin-bottom: 50px; font-weight: 800; letter-spacing: 2px;">CLIENT FEEDBACK</h2>
-      <div class="review-card" data-aos="fade-up">
-        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-        <p>"Incredible service. Saved me from a flat on the 401. Arrived within 40 minutes and had me back on the road in no time."</p>
-        <span class="reviewer">Verified Customer: Jason M.</span>
-      </div>
-      <div class="review-card" data-aos="fade-up">
-        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-        <p>"The only way I'll do tire swaps from now on. They came to my office and did the full swap while I was in meetings. Truly professional."</p>
-        <span class="reviewer">Verified Customer: Sarah L.</span>
-      </div>
-    </section>
   </main>
+
+  <footer style="padding: 60px 0; text-align: center; color: rgba(255,255,255,0.2); font-size: 12px;">
+    © 2025 THE MOBILE TIRE • ALL RIGHTS RESERVED • GTA & DURHAM
+  </footer>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     AOS.init({ duration: 1500 });
-    
-    // Master Video Fix
     const video = document.getElementById('bgVideo');
     const startVideo = () => { video.play().catch(e => {}); };
     window.addEventListener('touchstart', startVideo, {once: true});
