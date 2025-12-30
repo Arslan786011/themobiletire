@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TheMobileTire | Mobile Tire Service</title>
+  <meta name="description" content="TheMobileTire — Mobile tire swaps, flat repairs, balancing, tires & rims. We come to you across GTA + Durham. Call or text for a quick quote." />
+
+  <style>
+    :root{
+      --bg:#070b14;
+      --card:rgba(255,255,255,.07);
+      --line:rgba(255,255,255,.14);
+      --text:#eef3ff;
+      --muted:#b7c2e0;
+      --green:#22c55e;
+      --blue:#3b82f6;
+      --max:1100px;
+      --r:18px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: radial-gradient(900px 500px at 15% 0%, rgba(59,130,246,.25), transparent 55%),
+                  radial-gradient(900px 500px at 90% 0%, rgba(34,197,94,.18), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--max);margin:0 auto;padding:18px}
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      background: rgba(7,11,20,.78);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--line);
+    }
+    .top{
+      max-width:var(--max); margin:0 auto;
+      padding:12px 18px;
+      display:flex; gap:12px; align-items:center; justify-content:space-between;
+      flex-wrap:wrap;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      min-width:240px;
+    }
+    .logo{
+      width:40px;height:40px;border-radius:12px;
+      background: linear-gradient(135deg, rgba(59,130,246,1), rgba(34,197,94,1));
+    }
+    .brand b{display:block;font-size:14px}
+    .brand span{display:block;font-size:12px;color:var(--muted)}
+    .btns{display:flex;gap:10px;flex-wrap:wrap}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:11px 14px;border-radius:14px;font-weight:800;
+      border:1px solid rgba(255,255,255,.12);
+      min-width:150px;
+    }
+    .btn.call{background:var(--green);color:#05210f;border-color:rgba(34,197,94,.35)}
+    .btn.text{background:rgba(59,130,246,.18);border-color:rgba(59,130,246,.45)}
+    .btn.ghost{background:rgba(255,255,255,.06)}
+    .hero{
+      margin-top:16px;
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap:14px;
+    }
+    @media (max-width: 900px){ .hero{grid-template-columns:1fr} }
+    .card{
+      background: var(--card);
+      border:1px solid var(--line);
+      border-radius:var(--r);
+      padding:18px;
+    }
+    .badge{
+      display:inline-block;
+      padding:7px 11px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+      color:var(--muted);
+      font-size:13px;
+    }
+    h1{
+      margin:12px 0 8px;
+      font-size:44px;
+      line-height:1.05;
+      word-break: break-word; /* prevents cut-off */
+    }
+    @media (max-width: 520px){ h1{font-size:34px} }
+    p{margin:0;color:var(--muted);font-size:15px;line-height:1.5}
+    .kpis{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+    .kpis span{
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:999px;
+      padding:7px 10px;
+      color:var(--muted);
+      font-size:13px;
+      background: rgba(0,0,0,.14);
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+      margin-top:14px;
+    }
+    @media (max-width: 900px){ .grid{grid-template-columns:1fr} }
+    h2{margin:22px 0 10px;font-size:22px}
+    .item h3{margin:0 0 8px;font-size:16px}
+    .item p{margin:0;color:var(--muted);font-size:14px}
+    .quote{
+      display:grid; gap:10px; margin-top:10px;
+    }
+    input, textarea, select{
+      width:100%;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.22);
+      color:var(--text);
+      outline:none;
+    }
+    textarea{min-height:90px;resize:vertical}
+    .small{font-size:12px;color:var(--muted);margin-top:8px}
+    footer{
+      margin-top:22px;
+      padding:16px 0 28px;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      font-size:13px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- EDIT YOUR DETAILS HERE -->
+  <script>
+    const PHONE_TEL = "+16479202080";
+    const PHONE_DISPLAY = "(647) 920-2080";
+    const EMAIL_TO = "mirzaartslan@gmail.com";
+    const SERVICE_AREA = "GTA + Durham Region";
+  </script>
+
+  <div class="topbar">
+    <div class="top">
+      <div class="brand">
+        <div class="logo"></div>
+        <div>
+          <b>TheMobileTire</b>
+          <span id="areaTop">Mobile Tire Service • GTA + Durham</span>
+        </div>
+      </div>
+
+      <div class="btns">
+        <a class="btn call" id="callTop" href="#">📞 Call Now</a>
+        <a class="btn text" id="textTop" href="#">💬 Text</a>
+        <a class="btn ghost" href="#quote">✅ Get Quote</a>
+      </div>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="card">
+        <div class="badge">🚗 We come to you • Home / Work / Parking lot</div>
+        <h1>TheMobileTire</h1>
+        <p>Skip the shop. Book fast by call/text for tire swaps, flat repairs, balancing, tires & rims.</p>
+
+        <div class="btns" style="margin-top:14px">
+          <a class="btn call" id="callHero" href="#">📞 Call <span id="phone1" style="margin-left:8px"></span></a>
+          <a class="btn text" id="textHero" href="#">💬 Text for Quote</a>
+        </div>
+
+        <div class="kpis">
+          <span>✅ Fast booking</span>
+          <span>✅ Professional service</span>
+          <span>✅ Same-day when available</span>
+          <span>✅ Cash / eTransfer</span>
+        </div>
+      </div>
+
+      <div class="card" id="quote">
+        <h2 style="margin-top:0">Quick Quote</h2>
+        <form class="quote" onsubmit="return sendEmail(event)">
+          <input id="name" required placeholder="Your name" />
+          <input id="phone" required placeholder="Your phone number" />
+          <input id="city" required placeholder="City / Area (ex: Oshawa)" />
+          <select id="service" required>
+            <option value="" disabled selected>Select service</option>
+            <option>On-rim tire swap (seasonal)</option>
+            <option>Flat repair</option>
+            <option>Off-rim tire change</option>
+            <option>Balancing</option>
+            <option>New/Used tires</option>
+            <option>Rims / Rim repair</option>
+            <option>Other</option>
+          </select>
+          <input id="size" placeholder="Tire size (optional) (ex: 225/65R17)" />
+          <textarea id="details" placeholder="Details (how many tires, where you are, preferred time)"></textarea>
+          <button class="btn call" type="submit">Send Quote Request</button>
+          <div class="small">Fastest: text your tire size + location + what you need.</div>
+        </form>
+      </div>
+    </section>
+
+    <h2>Services</h2>
+    <section class="grid">
+      <div class="card item">
+        <h3>Seasonal Tire Swaps (On-Rim)</h3>
+        <p>Winter/summer changeovers at your home or workplace.</p>
+      </div>
+      <div class="card item">
+        <h3>Flat Tire Repair</h3>
+        <p>We inspect first. If repairable, we fix it properly.</p>
+      </div>
+      <div class="card item">
+        <h3>Off-Rim Tire Change</h3>
+        <p>Mounting/balancing options depending on setup and tire size.</p>
+      </div>
+    </section>
+
+    <h2>Service Area</h2>
+    <section class="grid">
+      <div class="card item">
+        <h3>Durham Region</h3>
+        <p>Bowmanville • Oshawa • Whitby • Ajax • Pickering</p>
+      </div>
+      <div class="card item">
+        <h3>GTA</h3>
+        <p>Toronto • Scarborough • North York • Markham • Vaughan</p>
+      </div>
+      <div class="card item">
+        <h3>Outside area?</h3>
+        <p>Text your location — we may still come with a travel fee.</p>
+      </div>
+    </section>
+
+    <footer>
+      <b>TheMobileTire</b><br>
+      Phone: <a id="callFoot" href="#"><u id="phone2"></u></a> • Text: <a id="textFoot" href="#"><u>Text Now</u></a><br>
+      <span id="areaFoot"></span><br><br>
+      © <span id="year"></span> TheMobileTire
+    </footer>
+  </main>
+
+  <script>
+    // Fill + link phone
+    const tel = "tel:" + PHONE_TEL;
+    const sms = "sms:" + PHONE_TEL;
+
+    document.getElementById("phone1").textContent = PHONE_DISPLAY;
+    document.getElementById("phone2").textContent = PHONE_DISPLAY;
+
+    document.getElementById("callTop").href = tel;
+    document.getElementById("callHero").href = tel;
+    document.getElementById("callFoot").href = tel;
+
+    document.getElementById("textTop").href = sms;
+    document.getElementById("textHero").href = sms;
+    document.getElementById("textFoot").href = sms;
+
+    document.getElementById("areaTop").textContent = "Mobile Tire Service • " + SERVICE_AREA;
+    document.getElementById("areaFoot").textContent = "Serving " + SERVICE_AREA;
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    function sendEmail(e){
+      e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const city = document.getElementById("city").value.trim();
+      const service = document.getElementById("service").value;
+      const size = document.getElementById("size").value.trim();
+      const details = document.getElementById("details").value.trim();
+
+      const subject = `Quote Request - ${service} - ${city}`;
+      const body =
+`New Quote Request
+
+Name: ${name}
+Phone: ${phone}
+City/Area: ${city}
+Service: ${service}
+Tire Size: ${size}
+
+Details:
+${details}
+`;
+
+      window.location.href = `mailto:${EMAIL_TO}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      return false;
+    }
+  </script>
+</body>
+</html>
