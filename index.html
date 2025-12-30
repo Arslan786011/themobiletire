@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-  <title>TheMobileTire | Elite Service Command</title>
+  <title>TheMobileTire | Elite Mobile Command</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;500;800&display=swap" rel="stylesheet">
@@ -13,184 +13,127 @@
   <style>
     :root {
       --cyan: #00f2ff;
-      --glass: rgba(255, 255, 255, 0.15); 
-      --glass-border: rgba(255, 255, 255, 0.3);
       --bg: #010204;
-      --text-main: #ffffff;
-      --text-dim: #e5e7eb;
+      --glass: rgba(255, 255, 255, 0.05);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Manrope', sans-serif; background-color: var(--bg); color: var(--text-main); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    body { font-family: 'Manrope', sans-serif; background-color: var(--bg); color: #fff; overflow-x: hidden; }
 
-    /* Video Playback Fix */
-    .video-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; background: #000; }
-    .video-container video { width: 100%; height: 100%; object-fit: cover; opacity: 0.45; }
-    .vignette { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, transparent 10%, var(--bg) 95%); z-index: -1; }
+    /* Clean Ticker */
+    .ticker {
+      width: 100%; background: rgba(0,0,0,0.9); backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.1); color: var(--cyan);
+      font-weight: 800; text-transform: uppercase; font-size: 10px; letter-spacing: 2px;
+      padding: 12px 0; position: fixed; top: 0; z-index: 2000; overflow: hidden;
+    }
+    .ticker-content { display: inline-block; animation: ticker 30s linear infinite; white-space: nowrap; }
+    .ticker-content span { padding-right: 50px; }
+    @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-    /* Top Ticker */
-    .ticker-wrap { position: fixed; top: 0; width: 100%; z-index: 2000; background: rgba(0,0,0,0.95); backdrop-filter: blur(15px); border-bottom: 1px solid var(--glass-border); padding: 10px 0; font-size: 10px; font-weight: 800; letter-spacing: 2px; color: var(--cyan); text-transform: uppercase; }
-    .ticker-move { display: inline-block; white-space: nowrap; animation: ticker-kf 35s linear infinite; }
-    .ticker-move span { padding-right: 50px; }
-    @keyframes ticker-kf { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    /* Background Video */
+    .video-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; }
+    .video-container video { width: 100%; height: 100%; object-fit: cover; opacity: 0.35; }
 
-    /* Container & Hero */
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-    .hero { min-height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 120px 20px 40px; }
-    .hero h1 { font-size: clamp(3.2rem, 15vw, 7.5rem); font-weight: 800; letter-spacing: -3px; line-height: 0.85; margin-bottom: 25px; }
-    .hero h1 span { color: var(--cyan); text-shadow: 0 0 30px rgba(0, 242, 255, 0.5); }
-    .hero p { max-width: 600px; color: var(--text-dim); font-size: 17px; line-height: 1.6; }
+    /* Hero */
+    .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; }
+    .hero h1 { font-size: clamp(3rem, 15vw, 7rem); font-weight: 800; letter-spacing: -3px; line-height: 0.9; margin-bottom: 20px; }
+    .hero h1 span { color: var(--cyan); }
+    .hero p { max-width: 500px; font-size: 1.1rem; color: #aaa; font-weight: 300; }
 
-    /* Floating Action Dock */
-    .dock { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: rgba(255,255,255,0.1); backdrop-filter: blur(20px); padding: 12px 25px; border-radius: 99px; border: 1px solid var(--glass-border); display: flex; gap: 20px; z-index: 3000; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
-    .dock-btn { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.4rem; transition: 0.3s; text-decoration: none; position: relative; }
-    .phone { background: #22c55e; animation: pulse-green 2s infinite; }
-    .whatsapp { background: #25D366; }
-    .quote-link { background: var(--cyan); color: #000; border-radius: 50px; width: auto; height: 55px; padding: 0 25px; font-weight: 800; font-size: 12px; text-transform: uppercase; }
-    @keyframes pulse-green { 0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(34, 197, 94, 0); } 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); } }
+    /* PERFECTLY ROUND DOCK & PULSE */
+    .dock-wrapper {
+      position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+      background: rgba(20, 20, 20, 0.8); backdrop-filter: blur(20px);
+      padding: 12px 20px; border-radius: 100px; border: 1px solid rgba(255,255,255,0.1);
+      display: flex; align-items: center; gap: 15px; z-index: 3000;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    }
 
-    /* Service Cards */
-    .tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin: 60px 0; }
-    .tech-card { background: var(--glass); border: 1px solid var(--glass-border); padding: 40px; border-radius: 20px; backdrop-filter: blur(25px); }
-    .tech-card h3 { font-size: 1.3rem; margin-bottom: 15px; color: var(--cyan); text-transform: uppercase; }
-    .tech-card p { color: var(--text-dim); line-height: 1.5; }
+    .round-btn {
+      width: 50px; height: 50px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none; color: white; font-size: 1.2rem;
+      position: relative; transition: 0.3s;
+    }
 
-    /* Infinite Review Slider */
-    .review-container { width: 100%; overflow: hidden; padding: 60px 0; background: rgba(0,0,0,0.3); border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border); margin-bottom: 100px; }
-    .review-track { display: flex; width: calc(350px * 10); animation: scroll-reviews 40s linear infinite; }
-    .review-track:hover { animation-play-state: paused; }
-    .review-card { width: 350px; flex-shrink: 0; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); padding: 30px; border-radius: 20px; margin: 0 15px; }
-    .stars { color: #facc15; margin-bottom: 10px; font-size: 0.9rem; }
-    .reviewer { font-weight: 800; font-size: 11px; color: var(--cyan); text-transform: uppercase; margin-top: 15px; display: block; }
-    @keyframes scroll-reviews { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-350px * 5)); } }
+    /* THE PULSE (PING) EFFECT */
+    .pulse-call { background: #22c55e; }
+    .pulse-call::after {
+      content: ''; position: absolute; width: 100%; height: 100%;
+      border-radius: 50%; background: #22c55e;
+      z-index: -1; animation: ping-out 2s infinite;
+    }
 
-    input, textarea { width: 100%; background: rgba(255,255,255,0.1); border: 1px solid var(--glass-border); padding: 20px; border-radius: 15px; color: #fff; margin-bottom: 20px; font-family: inherit; font-size: 16px; }
+    .pulse-wa { background: #25D366; }
+
+    @keyframes ping-out {
+      0% { transform: scale(1); opacity: 0.8; }
+      100% { transform: scale(1.8); opacity: 0; }
+    }
+
+    .get-quote {
+      background: var(--cyan); color: #000; padding: 0 25px;
+      height: 50px; border-radius: 100px; display: flex;
+      align-items: center; font-weight: 800; font-size: 11px;
+      letter-spacing: 1px; text-decoration: none; text-transform: uppercase;
+    }
+
+    /* Tech Grid Stack */
+    .tech-grid { padding: 40px 20px 120px; display: grid; gap: 20px; }
+    .tech-card {
+      background: var(--glass); border: 1px solid rgba(255,255,255,0.1);
+      padding: 30px; border-radius: 15px; backdrop-filter: blur(10px);
+    }
+    .tech-card i { color: var(--cyan); font-size: 1.5rem; margin-bottom: 15px; display: block; }
   </style>
 </head>
 <body>
 
-  <div class="video-container">
-    <video autoplay muted loop playsinline id="bgVideo">
-      <source src="sprinter-bg.mp4" type="video/mp4">
-    </video>
-  </div>
-  <div class="vignette"></div>
-
-  <div class="ticker-wrap">
-    <div class="ticker-move">
-      <span>SYSTEM STATUS: OPERATIONAL</span>
-      <span>• EMERGENCY 24/7 MOBILE TIRE</span>
-      <span>• SERVING GTA & DURHAM REGION</span>
+  <div class="ticker">
+    <div class="ticker-content">
+      <span>MISSION • CRITICAL • 24/7</span>
+      <span>• EMERGENCY MOBILE TIRE RESPONSE</span>
       <span>• ON-SITE SEASONAL SWAPS</span>
-      <span>• SYSTEM STATUS: OPERATIONAL</span>
+      <span>• PRECISION BALANCING</span>
+      <span>• MISSION • CRITICAL • 24/7</span>
     </div>
   </div>
 
-  <nav class="dock">
-    <a href="tel:+16479202080" class="dock-btn phone"><i class="fas fa-phone"></i></a>
-    <a href="https://wa.me/16479202080" class="dock-btn whatsapp"><i class="fab fa-whatsapp"></i></a>
-    <a href="#quote" class="dock-btn quote-link">Get Quote</a>
-  </nav>
+  <div class="video-container">
+    <video autoplay muted loop playsinline>
+      <source src="sprinter-bg.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="dock-wrapper">
+    <a href="tel:+16479202080" class="round-btn pulse-call"><i class="fas fa-phone"></i></a>
+    <a href="https://wa.me/16479202080" class="round-btn pulse-wa"><i class="fab fa-whatsapp"></i></a>
+    <a href="#quote" class="get-quote">Get Quote</a>
+  </div>
 
   <main class="container">
-    <section class="hero" data-aos="fade-up">
-      <div style="font-size: 10px; letter-spacing: 5px; color: var(--cyan); margin-bottom: 20px; font-weight: 800;">MISSION • CRITICAL • 24/7</div>
+    <section class="hero">
+      <div style="font-size: 10px; letter-spacing: 4px; color: var(--cyan); margin-bottom: 10px; font-weight: 800;">MISSION • CRITICAL • 24/7</div>
       <h1>THE MOBILE<br><span>TIRE.</span></h1>
-      <p>The elite standard for on-site automotive service. Precision tire swaps, flat repairs, and balancing delivered directly to your driveway.</p>
+      <p>The elite standard for on-site automotive service. Precision swaps and balancing delivered directly to your driveway.</p>
     </section>
 
     <div class="tech-grid">
       <div class="tech-card" data-aos="fade-up">
+        <i class="fas fa-snowflake"></i>
         <h3>Seasonal Swap</h3>
-        <p>Expert winter and summer tire transitions performed at your home or work location.</p>
+        <p>Swift seasonal transitions for your vehicle sets at your home or work.</p>
       </div>
-      <div class="tech-card" data-aos="fade-up" data-aos-delay="100">
+      <div class="tech-card" data-aos="fade-up">
+        <i class="fas fa-microchip"></i>
         <h3>Flat Repair</h3>
-        <p>Rapid response for punctures, bead leaks, and electronic TPMS sensor resets.</p>
-      </div>
-      <div class="tech-card" data-aos="fade-up" data-aos-delay="200">
-        <h3>Inventory & Repair</h3>
-        <p>Authorized dealer for new/used tires from Michelin and Pirelli. Professional on-site rim repair services.</p>
+        <p>Rapid response for punctures, bead leaks, and digital sensor resets.</p>
       </div>
     </div>
-
-    <div class="review-container">
-      <h2 style="text-align: center; margin-bottom: 40px; font-size: 1rem; letter-spacing: 4px; color: #fff;">LATEST CLIENT LOGS</h2>
-      <div class="review-track">
-        <div class="review-card">
-          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-          <p>"Saved me on the 401. Arrived in 35 mins. Professional and fast."</p>
-          <span class="reviewer">Jason M. • Verified</span>
-        </div>
-        <div class="review-card">
-          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-          <p>"The only way to do tire swaps. They came to my office. 10/10."</p>
-          <span class="reviewer">Sarah L. • Verified</span>
-        </div>
-        <div class="review-card">
-          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-          <p>"Best pricing in Durham. No shop wait times anymore."</p>
-          <span class="reviewer">Chris T. • Verified</span>
-        </div>
-        <div class="review-card">
-          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-          <p>"Super clean setup in their van. Balanced my off-rim tires perfectly."</p>
-          <span class="reviewer">Aman S. • Verified</span>
-        </div>
-        <div class="review-card">
-          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-          <p>"Highly recommend for flat repairs. Very honest and skilled."</p>
-          <span class="reviewer">Elena D. • Verified</span>
-        </div>
-        <div class="review-card">
-          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-          <p>"Saved me on the 401. Arrived in 35 mins. Professional and fast."</p>
-          <span class="reviewer">Jason M. • Verified</span>
-        </div>
-        <div class="review-card">
-          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-          <p>"The only way to do tire swaps. They came to my office. 10/10."</p>
-          <span class="reviewer">Sarah L. • Verified</span>
-        </div>
-        <div class="review-card">
-          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-          <p>"Best pricing in Durham. No shop wait times anymore."</p>
-          <span class="reviewer">Chris T. • Verified</span>
-        </div>
-      </div>
-    </div>
-
-    <section id="quote">
-      <div class="tech-card" style="max-width: 650px; margin: 0 auto; background: rgba(255,255,255,0.2);" data-aos="zoom-in">
-        <h3 style="text-align: center; margin-bottom: 35px;">Service Deployment Request</h3>
-        <form onsubmit="sendEmail(event)">
-          <input type="text" id="cName" placeholder="CLIENT NAME" required>
-          <input type="text" id="cPhone" placeholder="CONTACT NUMBER" required>
-          <textarea id="cDetails" placeholder="TIRE SIZE, LOCATION DATA & SERVICE TYPE" required></textarea>
-          <button type="submit" class="dock-btn quote-link" style="width: 100%; border: none; cursor: pointer; border-radius: 12px; justify-content: center;">Initiate Deployment</button>
-        </form>
-      </div>
-    </section>
-
   </main>
 
-  <footer style="padding: 60px 0; text-align: center; color: rgba(255,255,255,0.2); font-size: 12px;">
-    © 2025 THE MOBILE TIRE • ALL RIGHTS RESERVED • GTA & DURHAM
-  </footer>
-
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
-    AOS.init({ duration: 1500 });
-    const video = document.getElementById('bgVideo');
-    const startVideo = () => { video.play().catch(e => {}); };
-    window.addEventListener('touchstart', startVideo, {once: true});
-    window.addEventListener('scroll', startVideo, {once: true});
-
-    function sendEmail(e) {
-      e.preventDefault();
-      const body = `Client: ${document.getElementById('cName').value}%0D%0APhone: ${document.getElementById('cPhone').value}%0D%0AData: ${document.getElementById('cDetails').value}`;
-      window.location.href = `mailto:mirzaartslan@gmail.com?subject=Tire Service Deployment&body=${body}`;
-    }
-  </script>
+  <script>AOS.init({ duration: 1500 });</script>
 </body>
 </html>
