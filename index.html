@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
   <title>TheMobileTire | Elite Mobile Command</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,17 +20,19 @@
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     
-    body { 
-        font-family: 'Manrope', sans-serif; 
-        background-color: var(--bg); 
-        color: #fff; 
-        overflow-x: hidden; 
-        line-height: 1.6; 
-        overflow-y: auto; 
-        padding-top: 50px;
+    /* FIX: Force vertical scrolling */
+    html, body {
+        height: auto;
+        min-height: 100%;
+        background-color: var(--bg);
+        color: #fff;
+        font-family: 'Manrope', sans-serif;
+        overflow-x: hidden;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch;
     }
 
-    /* Ticker - Adjusted for Mobile */
+    /* Ticker */
     .ticker {
       width: 100%; background: rgba(0,0,0,0.9); border-bottom: 1px solid var(--glass-border);
       color: var(--cyan); font-weight: 800; text-transform: uppercase; font-size: 10px;
@@ -40,12 +42,20 @@
     .ticker-content span { padding-right: 50px; }
     @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-    /* WORKING VIDEO CONTAINER MERGE */
-    .video-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; }
-    .video-container video { width: 100%; height: 100%; object-fit: cover; opacity: 0.35; filter: saturate(0.5); }
-    .vignette { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, transparent 20%, var(--bg) 95%); z-index: -1; pointer-events: none; }
+    /* FIX: Video Layering */
+    .video-container { 
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+        z-index: -10; /* Locked at the very bottom */
+        background: #000; 
+    }
+    .video-container video { 
+        width: 100%; height: 100%; object-fit: cover; 
+        opacity: 0.45; /* Lighter for better visibility */
+        filter: saturate(0.6); 
+    }
+    .vignette { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, transparent 20%, var(--bg) 95%); z-index: -5; pointer-events: none; }
 
-    /* CIRCULAR PULSE DOCK */
+    /* Circular Pulse Dock */
     .dock-wrapper {
       position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
       background: rgba(15, 15, 15, 0.85); backdrop-filter: blur(25px);
@@ -73,44 +83,109 @@
       text-decoration: none; text-transform: uppercase; letter-spacing: 1px;
     }
 
-    /* Content Layout */
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; }
-    .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+    /* Content Styling */
+    .container { max-width: 1200px; margin: 0 auto; padding: 80px 20px; position: relative; z-index: 10; }
+    .hero { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
     .hero h1 { font-size: clamp(3.2rem, 15vw, 7.5rem); font-weight: 800; letter-spacing: -4px; line-height: 0.85; margin: 25px 0; }
     .hero h1 span { color: var(--cyan); text-shadow: 0 0 35px rgba(0, 242, 255, 0.35); }
 
-    /* Glowing Brand Grid */
     .brand-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 30px 0; width: 100%; max-width: 600px; }
-    @media (min-width: 768px) { .brand-grid { grid-template-columns: repeat(6, 1fr); } }
-    .brand-tile { 
-        background: rgba(0, 242, 255, 0.05); border: 1px solid var(--cyan); 
-        padding: 12px 5px; border-radius: 4px; text-align: center; 
-        font-weight: 800; font-size: 9px; color: var(--cyan); 
-        text-transform: uppercase; letter-spacing: 1px;
-    }
+    .brand-tile { background: rgba(0, 242, 255, 0.05); border: 1px solid var(--cyan); padding: 12px 5px; border-radius: 4px; text-align: center; font-weight: 800; font-size: 9px; color: var(--cyan); text-transform: uppercase; }
 
-    /* Services Grid */
     .tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 60px 0; }
-    .tech-card {
-      background: var(--glass); border: 1px solid var(--glass-border); padding: 40px; border-radius: 6px;
-      backdrop-filter: blur(15px); position: relative;
-    }
+    .tech-card { background: var(--glass); border: 1px solid var(--glass-border); padding: 40px; border-radius: 6px; backdrop-filter: blur(15px); }
     .tech-card i { color: var(--cyan); font-size: 1.8rem; margin-bottom: 20px; display: block; }
-    .tech-card h3 { letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px; font-size: 1.1rem; }
-
-    /* Moving Reviews Ticker */
+    
     .reviews-ticker-wrapper { width: 100%; background: rgba(0,0,0,0.3); border-top: 1px solid var(--glass-border); padding: 60px 0; overflow: hidden; white-space: nowrap; margin-bottom: 120px; }
     .reviews-content { display: inline-block; animation: ticker 70s linear infinite; }
-    .review-item { 
-      display: inline-block; background: var(--glass); border: 1px solid var(--glass-border); 
-      border-radius: 12px; padding: 30px; margin: 0 20px; width: 310px; 
-      vertical-align: top; white-space: normal; backdrop-filter: blur(10px);
-    }
-    .stars { color: #facc15; font-size: 14px; margin-bottom: 12px; }
+    .review-item { display: inline-block; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 12px; padding: 30px; margin: 0 20px; width: 310px; vertical-align: top; white-space: normal; backdrop-filter: blur(10px); }
   </style>
 </head>
 <body>
 
   <div class="ticker">
     <div class="ticker-content">
-      <span>🚨 EMERGENCY 24/
+      <span>🚨 EMERGENCY 24/7 SERVICE AVAILABLE • MOBILE TIRE CHANGE • FLAT REPAIR • OFF-RIM BALANCING • SERVING GTA & DURHAM REGION • </span>
+      <span>🚨 EMERGENCY 24/7 SERVICE AVAILABLE • MOBILE TIRE CHANGE • FLAT REPAIR • OFF-RIM BALANCING • SERVING GTA & DURHAM REGION • </span>
+    </div>
+  </div>
+
+  <div class="video-container">
+    <video autoplay muted loop playsinline>
+      <source src="sprinter-bg.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="vignette"></div>
+
+  <div class="dock-wrapper">
+    <a href="tel:+16479202080" class="round-btn pulse-call"><i class="fas fa-phone"></i></a>
+    <a href="https://wa.me/16479202080" class="round-btn pulse-wa"><i class="fab fa-whatsapp"></i></a>
+    <a href="#quote" class="get-quote">Get Quote</a>
+  </div>
+
+  <main class="container">
+    <section class="hero">
+      <div style="font-size: 10px; letter-spacing: 4px; color: var(--cyan); font-weight: 800;">MISSION • CRITICAL • 24/7</div>
+      <h1>THE MOBILE<br><span>TIRE.</span></h1>
+      
+      <div class="brand-grid">
+        <div class="brand-tile">Michelin</div><div class="brand-tile">Bridgestone</div>
+        <div class="brand-tile">Pirelli</div><div class="brand-tile">Continental</div>
+        <div class="brand-tile">Goodyear</div><div class="brand-tile">Hankook</div>
+      </div>
+
+      <p style="color: #999; font-weight: 300; max-width: 550px;">The elite standard for on-site automotive service. Precision tire swaps and balancing delivered directly to your driveway.</p>
+    </section>
+
+    <div class="tech-grid">
+      <div class="tech-card">
+        <i class="fas fa-snowflake"></i>
+        <h3>Seasonal Swap</h3>
+        <p>Expert seasonal transitions for summer and winter sets performed at your home or work.</p>
+      </div>
+      <div class="tech-card">
+        <i class="fas fa-screwdriver-wrench"></i>
+        <h3>Flat Repair</h3>
+        <p>Rapid response for punctures, bead leaks, and digital sensor resets on location.</p>
+      </div>
+    </div>
+
+    <div class="reviews-ticker-wrapper">
+      <div class="reviews-content">
+        <div class="review-item">
+          <div style="color: #facc15; margin-bottom: 12px;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p style="font-size: 13px;">"Professional, fast, and great pricing. Came to my work and finished in 30 mins."</p>
+          <div style="color: var(--cyan); font-size: 11px; font-weight: 800; margin-top: 15px;">MIKE R. • VERIFIED</div>
+        </div>
+        <div class="review-item">
+          <div style="color: #facc15; margin-bottom: 12px;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p style="font-size: 13px;">"Saved me from a flat on the 401. Arrived quickly and got me back on the road."</p>
+          <div style="color: var(--cyan); font-size: 11px; font-weight: 800; margin-top: 15px;">SARAH J. • VERIFIED</div>
+        </div>
+      </div>
+    </div>
+
+    <section id="quote" style="padding-bottom: 200px;">
+      <div class="tech-card" style="max-width: 600px; margin: 0 auto; border-color: var(--cyan);">
+        <h3 style="text-align: center; margin-bottom: 30px; letter-spacing: 2px;">REQUEST DEPLOYMENT</h3>
+        <form onsubmit="sendEmail(event)">
+          <input type="text" id="cName" placeholder="CLIENT NAME" required style="width: 100%; background:transparent; border:none; border-bottom:1px solid #333; padding: 18px 0; color: #fff; margin-bottom: 20px; font-family: inherit;">
+          <input type="text" id="cPhone" placeholder="CONTACT NUMBER" required style="width: 100%; background:transparent; border:none; border-bottom:1px solid #333; padding: 18px 0; color: #fff; margin-bottom: 20px; font-family: inherit;">
+          <textarea id="cDetails" placeholder="TIRE SIZE & LOCATION DATA" style="width: 100%; background:transparent; border:none; border-bottom:1px solid #333; padding: 15px 0; color: #fff; margin-bottom: 30px; height: 80px; font-family: inherit;"></textarea>
+          <button type="submit" style="width: 100%; background: var(--cyan); color: #000; border: none; padding: 22px; border-radius: 4px; font-weight: 800; cursor: pointer; text-transform: uppercase;">Execute Deployment</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1500, once: true });
+    function sendEmail(e) {
+      e.preventDefault();
+      const body = `Client: ${document.getElementById('cName').value}%0D%0APhone: ${document.getElementById('cPhone').value}%0D%0AData: ${document.getElementById('cDetails').value}`;
+      window.location.href = `mailto:mirzaartslan@gmail.com?subject=Tire Service Request&body=${body}`;
+    }
+  </script>
+</body>
+</html>
