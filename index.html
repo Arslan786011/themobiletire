@@ -3,117 +3,201 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>TheMobileTire | Mobile Tire Service</title>
-  <meta name="description" content="TheMobileTire — Mobile tire swaps, flat repairs, balancing, tires & rims. We come to you across GTA + Durham. Call or text for a quick quote." />
+  <title>TheMobileTire | Mobile Tire Service (GTA + Durham)</title>
+  <meta name="description" content="TheMobileTire — Mobile tire swaps, flat repairs, mounting & balancing, TPMS, valve stems, tires & rims. We come to you across GTA + Durham. Call/text to book." />
+
+  <!-- Simple modern font (safe) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg:#070b14;
-      --card:rgba(255,255,255,.07);
+      --bg:#070a10;
+      --bg2:#0b1220;
+      --card:rgba(255,255,255,.06);
       --line:rgba(255,255,255,.14);
       --text:#eef3ff;
-      --muted:#b7c2e0;
-      --green:#22c55e;
-      --blue:#3b82f6;
-      --max:1100px;
+      --muted:#b8c4e6;
+      --brand:#6d5efc;      /* purple */
+      --brand2:#22c55e;     /* green */
+      --accent:#00d4ff;     /* cyan */
+      --shadow: 0 18px 55px rgba(0,0,0,.55);
       --r:18px;
+      --max:1140px;
     }
     *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
     body{
       margin:0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: radial-gradient(900px 500px at 15% 0%, rgba(59,130,246,.25), transparent 55%),
-                  radial-gradient(900px 500px at 90% 0%, rgba(34,197,94,.18), transparent 55%),
-                  var(--bg);
+      font-family: Manrope, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 15% -10%, rgba(109,94,252,.35), transparent 55%),
+        radial-gradient(1100px 600px at 95% 0%, rgba(34,197,94,.22), transparent 55%),
+        radial-gradient(900px 500px at 60% 110%, rgba(0,212,255,.12), transparent 60%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      line-height:1.45;
     }
     a{color:inherit;text-decoration:none}
     .wrap{max-width:var(--max);margin:0 auto;padding:18px}
+
+    /* Top call bar (like the example site) */
     .topbar{
-      position:sticky; top:0; z-index:50;
-      background: rgba(7,11,20,.78);
-      backdrop-filter: blur(10px);
-      border-bottom:1px solid var(--line);
+      background: rgba(0,0,0,.22);
+      border-bottom: 1px solid var(--line);
     }
-    .top{
-      max-width:var(--max); margin:0 auto;
+    .topbar .inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:10px 18px;
+      display:flex;
+      gap:12px;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      font-size:13px;
+      color:var(--muted);
+    }
+    .topbar b{color:var(--text)}
+    .miniBtns{display:flex;gap:10px;flex-wrap:wrap}
+    .mini{
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      color:var(--text);
+      font-weight:800;
+      font-size:12px;
+    }
+    .mini:hover{border-color:rgba(255,255,255,.22)}
+
+    /* Header / nav */
+    header{
+      position: sticky;
+      top:0;
+      z-index:50;
+      background: rgba(7,10,16,.68);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid rgba(255,255,255,.10);
+    }
+    .head{
+      max-width:var(--max);
+      margin:0 auto;
       padding:12px 18px;
-      display:flex; gap:12px; align-items:center; justify-content:space-between;
+      display:flex;
+      gap:14px;
+      align-items:center;
+      justify-content:space-between;
       flex-wrap:wrap;
     }
     .brand{
-      display:flex; align-items:center; gap:10px;
+      display:flex;
+      align-items:center;
+      gap:10px;
       min-width:240px;
     }
     .logo{
-      width:40px;height:40px;border-radius:12px;
-      background: linear-gradient(135deg, rgba(59,130,246,1), rgba(34,197,94,1));
+      width:42px;height:42px;border-radius:14px;
+      background: linear-gradient(135deg, var(--brand), var(--accent));
+      box-shadow: var(--shadow);
     }
-    .brand b{display:block;font-size:14px}
-    .brand span{display:block;font-size:12px;color:var(--muted)}
-    .btns{display:flex;gap:10px;flex-wrap:wrap}
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;
-      padding:11px 14px;border-radius:14px;font-weight:800;
-      border:1px solid rgba(255,255,255,.12);
-      min-width:150px;
-    }
-    .btn.call{background:var(--green);color:#05210f;border-color:rgba(34,197,94,.35)}
-    .btn.text{background:rgba(59,130,246,.18);border-color:rgba(59,130,246,.45)}
-    .btn.ghost{background:rgba(255,255,255,.06)}
-    .hero{
-      margin-top:16px;
-      display:grid;
-      grid-template-columns: 1.25fr .75fr;
-      gap:14px;
-    }
-    @media (max-width: 900px){ .hero{grid-template-columns:1fr} }
-    .card{
-      background: var(--card);
-      border:1px solid var(--line);
-      border-radius:var(--r);
-      padding:18px;
-    }
-    .badge{
-      display:inline-block;
-      padding:7px 11px;
+    .brand .name{font-weight:900; letter-spacing:.2px}
+    .brand .sub{font-size:12px;color:var(--muted)}
+    nav{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+    nav a{
+      padding:9px 12px;
       border-radius:999px;
       border:1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.18);
       color:var(--muted);
+      font-size:13px;
+      transition:.12s;
+    }
+    nav a:hover{color:var(--text);border-color:rgba(255,255,255,.22)}
+    .cta{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:11px 14px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      font-weight:900;
+      letter-spacing:.2px;
+      user-select:none;
+      transition: transform .08s ease;
+      min-width:150px;
+    }
+    .btn:active{transform:scale(.98)}
+    .btn.primary{
+      background: linear-gradient(135deg, var(--brand2), rgba(34,197,94,.75));
+      color:#05210f;
+      border-color: rgba(34,197,94,.35);
+    }
+    .btn.alt{
+      background: rgba(109,94,252,.16);
+      border-color: rgba(109,94,252,.45);
+    }
+    .btn.ghost{
+      background: rgba(255,255,255,.06);
+    }
+    @media (max-width: 980px){
+      nav{display:none}
+    }
+
+    /* Cards / sections */
+    .card{
+      background: var(--card);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius: var(--r);
+      box-shadow: var(--shadow);
+    }
+    .hero{
+      padding:18px 0 8px;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:14px;
+      align-items:stretch;
+    }
+    @media (max-width: 980px){ .hero{grid-template-columns:1fr} }
+
+    .heroMain{padding:22px}
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(0,212,255,.35);
+      background: rgba(0,212,255,.08);
+      color:#bff6ff;
+      font-weight:800;
       font-size:13px;
     }
     h1{
-      margin:12px 0 8px;
+      margin:12px 0 10px;
       font-size:44px;
       line-height:1.05;
-      word-break: break-word; /* prevents cut-off */
+      word-break: break-word;
     }
     @media (max-width: 520px){ h1{font-size:34px} }
-    p{margin:0;color:var(--muted);font-size:15px;line-height:1.5}
-    .kpis{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+    .lead{margin:0;color:var(--muted);font-size:16px}
+    .quickRow{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .kpis{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
     .kpis span{
-      border:1px solid rgba(255,255,255,.12);
+      padding:8px 10px;
       border-radius:999px;
-      padding:7px 10px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.14);
       color:var(--muted);
       font-size:13px;
-      background: rgba(0,0,0,.14);
     }
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:14px;
-      margin-top:14px;
-    }
-    @media (max-width: 900px){ .grid{grid-template-columns:1fr} }
-    h2{margin:22px 0 10px;font-size:22px}
-    .item h3{margin:0 0 8px;font-size:16px}
-    .item p{margin:0;color:var(--muted);font-size:14px}
-    .quote{
-      display:grid; gap:10px; margin-top:10px;
-    }
-    input, textarea, select{
+
+    .heroSide{padding:18px}
+    .heroSide h3{margin:0 0 8px}
+    .small{margin:0;color:var(--muted);font-size:12px}
+    form{display:grid;gap:10px;margin-top:10px}
+    input, select, textarea{
       width:100%;
       padding:12px 12px;
       border-radius:14px;
@@ -122,157 +206,356 @@
       color:var(--text);
       outline:none;
     }
-    textarea{min-height:90px;resize:vertical}
-    .small{font-size:12px;color:var(--muted);margin-top:8px}
+    textarea{min-height:92px; resize:vertical}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    @media (max-width: 520px){ .grid2{grid-template-columns:1fr} }
+
+    .section{padding:14px 0}
+    .titleRow{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:12px;
+      margin-top:10px;
+    }
+    .titleRow h2{margin:0;font-size:22px}
+    .titleRow p{margin:0;color:var(--muted)}
+    .cards{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+      margin-top:12px;
+    }
+    @media (max-width: 980px){ .cards{grid-template-columns:1fr} }
+    .item{padding:16px}
+    .item h4{margin:0 0 6px;font-size:16px}
+    .item p{margin:0;color:var(--muted);font-size:14px}
+    .tag{
+      display:inline-flex;
+      margin-top:10px;
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(109,94,252,.12);
+      color:#d7d3ff;
+      font-weight:900;
+      font-size:12px;
+    }
+
+    .banner{
+      margin-top:14px;
+      padding:16px;
+      border-radius: var(--r);
+      border:1px solid rgba(255,255,255,.12);
+      background:
+        linear-gradient(135deg, rgba(109,94,252,.18), rgba(0,212,255,.08), rgba(34,197,94,.12));
+    }
+    .banner b{display:block;margin-bottom:6px}
+    .banner p{margin:0;color:var(--muted)}
+
     footer{
-      margin-top:22px;
-      padding:16px 0 28px;
-      border-top:1px solid var(--line);
+      margin-top:18px;
+      padding:18px 0 34px;
+      border-top:1px solid rgba(255,255,255,.12);
       color:var(--muted);
       font-size:13px;
+    }
+    .footGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media (max-width: 900px){ .footGrid{grid-template-columns:1fr} }
+
+    /* mobile sticky bar */
+    .sticky{
+      position:fixed;
+      left:0; right:0; bottom:0;
+      padding:10px 14px;
+      background: rgba(7,10,16,.78);
+      backdrop-filter: blur(10px);
+      border-top:1px solid rgba(255,255,255,.12);
+      display:none;
+      z-index:60;
+    }
+    .sticky .bar{
+      max-width:var(--max);
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    }
+    @media (max-width: 980px){
+      .sticky{display:block}
+      body{padding-bottom:78px}
     }
   </style>
 </head>
 
 <body>
-
-  <!-- EDIT YOUR DETAILS HERE -->
+  <!-- EDIT THESE -->
   <script>
-    const PHONE_TEL = "+16479202080";
+    const BRAND = "TheMobileTire";
     const PHONE_DISPLAY = "(647) 920-2080";
-    const EMAIL_TO = "mirzaartslan@gmail.com";
+    const PHONE_TEL = "+16479202080";
     const SERVICE_AREA = "GTA + Durham Region";
+    const QUOTE_EMAIL = "mirzaartslan@gmail.com"; // change if needed
   </script>
 
+  <!-- top phone strip -->
   <div class="topbar">
-    <div class="top">
-      <div class="brand">
-        <div class="logo"></div>
-        <div>
-          <b>TheMobileTire</b>
-          <span id="areaTop">Mobile Tire Service • GTA + Durham</span>
-        </div>
-      </div>
-
-      <div class="btns">
-        <a class="btn call" id="callTop" href="#">📞 Call Now</a>
-        <a class="btn text" id="textTop" href="#">💬 Text</a>
-        <a class="btn ghost" href="#quote">✅ Get Quote</a>
+    <div class="inner">
+      <div>📞 Call/Text: <b id="phoneTopText"></b> • <span id="areaTopText"></span></div>
+      <div class="miniBtns">
+        <a class="mini" id="callMini" href="#">Call Now</a>
+        <a class="mini" id="textMini" href="#">Text</a>
+        <a class="mini" href="#quote">Get Quote</a>
       </div>
     </div>
   </div>
 
-  <main class="wrap">
-    <section class="hero">
-      <div class="card">
-        <div class="badge">🚗 We come to you • Home / Work / Parking lot</div>
-        <h1>TheMobileTire</h1>
-        <p>Skip the shop. Book fast by call/text for tire swaps, flat repairs, balancing, tires & rims.</p>
+  <header>
+    <div class="head">
+      <a class="brand" href="#top">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <div class="name" id="brandName">TheMobileTire</div>
+          <div class="sub">Mobile tire shop • We come to you</div>
+        </div>
+      </a>
 
-        <div class="btns" style="margin-top:14px">
-          <a class="btn call" id="callHero" href="#">📞 Call <span id="phone1" style="margin-left:8px"></span></a>
-          <a class="btn text" id="textHero" href="#">💬 Text for Quote</a>
+      <nav aria-label="primary">
+        <a href="#services">Services</a>
+        <a href="#how">How it works</a>
+        <a href="#areas">Service area</a>
+        <a href="#quote">Book / Quote</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="cta">
+        <a class="btn primary" id="callTop" href="#">📞 Call</a>
+        <a class="btn alt" id="textTop" href="#">💬 Text</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap" id="top">
+    <section class="hero">
+      <div class="card heroMain">
+        <div class="pill">🚗 Mobile Tire Service — We Come To You</div>
+        <h1><span id="brandHero">TheMobileTire</span></h1>
+        <p class="lead">
+          Tire swaps, flat repairs, mounting & balancing, TPMS, valve stems, tires & rims — without the shop visit.
+          Book fast by call/text.
+        </p>
+
+        <div class="quickRow">
+          <a class="btn primary" id="callHero" href="#">📞 Call <span id="phoneHero" style="margin-left:8px"></span></a>
+          <a class="btn alt" id="textHero" href="#">💬 Text for a Quote</a>
+          <a class="btn ghost" href="#quote">✅ Book / Quote</a>
         </div>
 
         <div class="kpis">
-          <span>✅ Fast booking</span>
-          <span>✅ Professional service</span>
+          <span>✅ Home / Work / Roadside</span>
           <span>✅ Same-day when available</span>
+          <span>✅ Clean & professional</span>
           <span>✅ Cash / eTransfer</span>
+        </div>
+
+        <div class="banner">
+          <b>Order tires + install at your location</b>
+          <p>Tell us your tire size (ex: 225/65R17) and we’ll send options, then install wherever you are.</p>
         </div>
       </div>
 
-      <div class="card" id="quote">
-        <h2 style="margin-top:0">Quick Quote</h2>
-        <form class="quote" onsubmit="return sendEmail(event)">
-          <input id="name" required placeholder="Your name" />
-          <input id="phone" required placeholder="Your phone number" />
-          <input id="city" required placeholder="City / Area (ex: Oshawa)" />
-          <select id="service" required>
-            <option value="" disabled selected>Select service</option>
-            <option>On-rim tire swap (seasonal)</option>
-            <option>Flat repair</option>
-            <option>Off-rim tire change</option>
-            <option>Balancing</option>
-            <option>New/Used tires</option>
-            <option>Rims / Rim repair</option>
-            <option>Other</option>
-          </select>
-          <input id="size" placeholder="Tire size (optional) (ex: 225/65R17)" />
+      <aside class="card heroSide" id="quote">
+        <h3>Book / Get a Quote</h3>
+        <p class="small">This creates an email you can send instantly. For fastest response, text us.</p>
+
+        <form onsubmit="return sendQuoteEmail(event)">
+          <div class="grid2">
+            <input id="name" required placeholder="Full name">
+            <input id="phone" required placeholder="Phone number">
+          </div>
+
+          <div class="grid2">
+            <input id="city" required placeholder="City / Area (e.g., Oshawa)">
+            <select id="service" required>
+              <option value="" disabled selected>Select service</option>
+              <option>On-rim tire swap (seasonal)</option>
+              <option>Flat tire repair</option>
+              <option>Mount & balance (off-rim)</option>
+              <option>Wheel balancing</option>
+              <option>TPMS reset / service</option>
+              <option>Valve stem replacement</option>
+              <option>New / used tires</option>
+              <option>Rims / rim repair</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <input id="tiresize" placeholder="Tire size (optional) (e.g., 225/65R17)">
           <textarea id="details" placeholder="Details (how many tires, where you are, preferred time)"></textarea>
-          <button class="btn call" type="submit">Send Quote Request</button>
-          <div class="small">Fastest: text your tire size + location + what you need.</div>
+
+          <button class="btn primary" type="submit">Send Quote Request</button>
+          <div class="small">Or text us now: <a id="textInline" href="#"><u>Tap here</u></a></div>
         </form>
+      </aside>
+    </section>
+
+    <section class="section" id="services">
+      <div class="titleRow">
+        <h2>Services</h2>
+        <p>Complete mobile tire shop — we come to you.</p>
+      </div>
+
+      <div class="cards">
+        <div class="card item">
+          <h4>Tire Installation (Mobile)</h4>
+          <p>Order tires and get them installed at your location — no shop visit.</p>
+          <div class="tag">Popular</div>
+        </div>
+        <div class="card item">
+          <h4>Flat Tire Repair</h4>
+          <p>Spare swap, air top-up, patch repairs (when safe), or replacement options.</p>
+          <div class="tag">Fast help</div>
+        </div>
+        <div class="card item">
+          <h4>Mount & Balance</h4>
+          <p>Mounting and balancing for a smoother ride and less tire wear.</p>
+          <div class="tag">Smooth ride</div>
+        </div>
+      </div>
+
+      <div class="cards">
+        <div class="card item">
+          <h4>TPMS Reset / Service</h4>
+          <p>We reset/service TPMS where applicable after installs and swaps.</p>
+          <div class="tag">TPMS</div>
+        </div>
+        <div class="card item">
+          <h4>Valve Stem Replacement</h4>
+          <p>Fix leaks without waiting around at a repair shop.</p>
+          <div class="tag">Stops leaks</div>
+        </div>
+        <div class="card item">
+          <h4>Tires & Rims</h4>
+          <p>New/used tires, alloy & steel rims — ask for options by size and budget.</p>
+          <div class="tag">Deals</div>
+        </div>
       </div>
     </section>
 
-    <h2>Services</h2>
-    <section class="grid">
-      <div class="card item">
-        <h3>Seasonal Tire Swaps (On-Rim)</h3>
-        <p>Winter/summer changeovers at your home or workplace.</p>
+    <section class="section" id="how">
+      <div class="titleRow">
+        <h2>How it works</h2>
+        <p>Simple 3-step booking.</p>
       </div>
-      <div class="card item">
-        <h3>Flat Tire Repair</h3>
-        <p>We inspect first. If repairable, we fix it properly.</p>
-      </div>
-      <div class="card item">
-        <h3>Off-Rim Tire Change</h3>
-        <p>Mounting/balancing options depending on setup and tire size.</p>
+
+      <div class="cards">
+        <div class="card item">
+          <h4>1) Call or Text</h4>
+          <p>Send your location + tire size + what you need. Fastest response by text.</p>
+        </div>
+        <div class="card item">
+          <h4>2) Pick a time</h4>
+          <p>We confirm availability and give you a price range before we come out.</p>
+        </div>
+        <div class="card item">
+          <h4>3) We come to you</h4>
+          <p>Home, workplace, or roadside — professional service and you’re back on the road.</p>
+        </div>
       </div>
     </section>
 
-    <h2>Service Area</h2>
-    <section class="grid">
-      <div class="card item">
-        <h3>Durham Region</h3>
-        <p>Bowmanville • Oshawa • Whitby • Ajax • Pickering</p>
+    <section class="section" id="areas">
+      <div class="titleRow">
+        <h2>Service area</h2>
+        <p id="areaLine">Serving GTA + Durham Region</p>
       </div>
-      <div class="card item">
-        <h3>GTA</h3>
-        <p>Toronto • Scarborough • North York • Markham • Vaughan</p>
-      </div>
-      <div class="card item">
-        <h3>Outside area?</h3>
-        <p>Text your location — we may still come with a travel fee.</p>
+
+      <div class="cards">
+        <div class="card item">
+          <h4>Durham</h4>
+          <p>Bowmanville • Oshawa • Whitby • Ajax • Pickering</p>
+        </div>
+        <div class="card item">
+          <h4>GTA</h4>
+          <p>Toronto • Scarborough • North York • Markham • Vaughan</p>
+        </div>
+        <div class="card item">
+          <h4>Outside area?</h4>
+          <p>Text your city — we may still come with a travel fee depending on schedule.</p>
+        </div>
       </div>
     </section>
 
-    <footer>
-      <b>TheMobileTire</b><br>
-      Phone: <a id="callFoot" href="#"><u id="phone2"></u></a> • Text: <a id="textFoot" href="#"><u>Text Now</u></a><br>
-      <span id="areaFoot"></span><br><br>
-      © <span id="year"></span> TheMobileTire
-    </footer>
+    <section class="section" id="contact">
+      <div class="card" style="padding:18px">
+        <div class="titleRow" style="margin:0">
+          <h2 style="margin:0">Need help now?</h2>
+          <p style="margin:0">Call or text — quickest way to lock a spot.</p>
+        </div>
+
+        <div class="cta" style="justify-content:flex-start;margin-top:12px">
+          <a class="btn primary" id="callBottom" href="#">📞 Call <span id="phoneBottom" style="margin-left:8px"></span></a>
+          <a class="btn alt" id="textBottom" href="#">💬 Text</a>
+          <a class="btn ghost" href="#quote">✅ Book / Quote</a>
+        </div>
+      </div>
+
+      <footer>
+        <div class="footGrid">
+          <div>
+            <b id="brandFoot">TheMobileTire</b><br/>
+            Phone: <a id="callFoot" href="#"><u id="phoneFoot"></u></a><br/>
+            Text: <a id="textFoot" href="#"><u>Text now</u></a><br/>
+            <span class="small">Serving <span id="areaFoot"></span></span>
+          </div>
+          <div class="small">
+            Pricing varies by tire size and situation. Flat repairs depend on puncture location and safety.
+            © <span id="year"></span> <span id="brandCopy"></span>
+          </div>
+        </div>
+      </footer>
+    </section>
   </main>
 
+  <div class="sticky">
+    <div class="bar">
+      <a class="btn primary" id="callSticky" href="#">📞 Call</a>
+      <a class="btn alt" id="textSticky" href="#">💬 Text</a>
+    </div>
+  </div>
+
   <script>
-    // Fill + link phone
+    // Apply brand + links
+    document.getElementById("brandName").textContent = BRAND;
+    document.getElementById("brandHero").textContent = BRAND;
+    document.getElementById("brandFoot").textContent = BRAND;
+    document.getElementById("brandCopy").textContent = BRAND;
+
+    document.getElementById("phoneTopText").textContent = PHONE_DISPLAY;
+    document.getElementById("phoneHero").textContent = PHONE_DISPLAY;
+    document.getElementById("phoneBottom").textContent = PHONE_DISPLAY;
+    document.getElementById("phoneFoot").textContent = PHONE_DISPLAY;
+
+    document.getElementById("areaTopText").textContent = SERVICE_AREA;
+    document.getElementById("areaLine").textContent = "Serving " + SERVICE_AREA;
+    document.getElementById("areaFoot").textContent = SERVICE_AREA;
+
     const tel = "tel:" + PHONE_TEL;
     const sms = "sms:" + PHONE_TEL;
 
-    document.getElementById("phone1").textContent = PHONE_DISPLAY;
-    document.getElementById("phone2").textContent = PHONE_DISPLAY;
+    ["callMini","callTop","callHero","callBottom","callFoot","callSticky"].forEach(id => document.getElementById(id).href = tel);
+    ["textMini","textTop","textHero","textBottom","textFoot","textSticky","textInline"].forEach(id => document.getElementById(id).href = sms);
 
-    document.getElementById("callTop").href = tel;
-    document.getElementById("callHero").href = tel;
-    document.getElementById("callFoot").href = tel;
-
-    document.getElementById("textTop").href = sms;
-    document.getElementById("textHero").href = sms;
-    document.getElementById("textFoot").href = sms;
-
-    document.getElementById("areaTop").textContent = "Mobile Tire Service • " + SERVICE_AREA;
-    document.getElementById("areaFoot").textContent = "Serving " + SERVICE_AREA;
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    function sendEmail(e){
+    // Quote form -> mailto
+    function sendQuoteEmail(e){
       e.preventDefault();
       const name = document.getElementById("name").value.trim();
       const phone = document.getElementById("phone").value.trim();
       const city = document.getElementById("city").value.trim();
       const service = document.getElementById("service").value;
-      const size = document.getElementById("size").value.trim();
+      const tiresize = document.getElementById("tiresize").value.trim();
       const details = document.getElementById("details").value.trim();
 
       const subject = `Quote Request - ${service} - ${city}`;
@@ -283,15 +566,16 @@ Name: ${name}
 Phone: ${phone}
 City/Area: ${city}
 Service: ${service}
-Tire Size: ${size}
+Tire Size: ${tiresize}
 
 Details:
 ${details}
 `;
 
-      window.location.href = `mailto:${EMAIL_TO}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = `mailto:${encodeURIComponent(QUOTE_EMAIL)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
       return false;
     }
+    window.sendQuoteEmail = sendQuoteEmail;
   </script>
 </body>
 </html>
