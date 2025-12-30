@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>TheMobileTire | Premium GTA & Durham Mobile Tire Shop</title>
+  <title>TheMobileTire | GTA & Durham Elite Mobile Tire Shop</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&display=swap" rel="stylesheet">
@@ -21,65 +21,63 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Manrope', sans-serif; background-color: var(--bg); color: #fff; overflow-x: hidden; padding-top: 80px; }
 
-    /* Airport Ticker */
-    .ticker {
-      width: 100%; background: #000; border-bottom: 2px solid var(--cyan);
-      color: var(--cyan); font-weight: 800; text-transform: uppercase;
-      font-size: 13px; letter-spacing: 2px; padding: 10px 0;
-      position: fixed; top: 0; z-index: 2000; overflow: hidden; white-space: nowrap;
+    /* Floating Inventory Bubbles */
+    .bubble {
+      position: absolute; background: var(--glass); backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border); border-radius: 50%;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; z-index: -1; animation: float 12s infinite ease-in-out;
+      padding: 25px; transition: 0.5s; pointer-events: none;
     }
-    .ticker-content { display: inline-block; animation: ticker 30s linear infinite; }
-    .ticker-content span { padding-right: 50px; }
+    .bubble i { color: var(--cyan); font-size: 1.8rem; margin-bottom: 8px; text-shadow: 0 0 15px var(--cyan); }
+    .bubble span { font-size: 11px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; line-height: 1.2; }
+    @keyframes float { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(25px, -40px); } }
+
+    /* Status & Ticker */
+    .ticker { width: 100%; background: #000; border-bottom: 2px solid var(--cyan); color: var(--cyan); font-weight: 800; text-transform: uppercase; font-size: 13px; letter-spacing: 2px; padding: 10px 0; position: fixed; top: 0; z-index: 2000; overflow: hidden; white-space: nowrap; }
+    .ticker-content { display: inline-block; animation: ticker 40s linear infinite; }
+    .ticker-content span { padding-right: 60px; }
     @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-    /* Live Status Bar */
-    .status-bar {
-      background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(15px);
-      padding: 12px; text-align: center; font-size: 11px; letter-spacing: 2px;
-      font-weight: 800; border-bottom: 1px solid var(--glass-border);
-      position: fixed; top: 39px; width: 100%; z-index: 1000;
-    }
-    .pulse { display: inline-block; width: 8px; height: 8px; background: #22c55e; border-radius: 50%; margin-right: 8px; box-shadow: 0 0 10px #22c55e; animation: pulse-green 2s infinite; }
-    @keyframes pulse-green { 0% { transform: scale(0.9); opacity: 1; } 70% { transform: scale(1.5); opacity: 0; } 100% { transform: scale(0.9); opacity: 0; } }
+    /* Video & Background */
+    .video-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -3; overflow: hidden; }
+    .video-container video { min-width: 100%; min-height: 100%; object-fit: cover; opacity: 0.35; filter: grayscale(0.5); }
+    .video-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, transparent, var(--bg)); z-index: -2; }
 
-    /* Cinematic Video */
-    .video-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; overflow: hidden; }
-    .video-container video { min-width: 100%; min-height: 100%; object-fit: cover; opacity: 0.4; }
-    .video-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, transparent, var(--bg)); z-index: -1; }
+    /* Content Layout */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 25px; position: relative; }
+    .hero { height: 95vh; display: flex; flex-direction: column; justify-content: center; }
+    .hero h1 { font-size: clamp(3.5rem, 12vw, 6.8rem); font-weight: 800; line-height: 0.85; letter-spacing: -5px; margin: 25px 0; }
+    .hero span { color: var(--cyan); text-shadow: 0 0 40px rgba(0, 242, 255, 0.6); }
 
-    /* Glass Cards */
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 25px; }
-    .hero { height: 90vh; display: flex; flex-direction: column; justify-content: center; }
-    .hero h1 { font-size: clamp(3rem, 10vw, 6.5rem); font-weight: 800; line-height: 0.85; letter-spacing: -4px; margin: 20px 0; }
-    .hero span { color: var(--cyan); text-shadow: 0 0 30px rgba(0, 242, 255, 0.4); }
-
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; margin: 50px 0; }
-    .glass-card {
-      background: var(--glass); backdrop-filter: blur(15px); border: 1px solid var(--glass-border);
-      border-radius: 28px; padding: 45px; transition: 0.4s; text-align: left;
-    }
-    .glass-card:hover { border-color: var(--cyan); transform: translateY(-10px); }
-    .glass-card i { font-size: 2.5rem; color: var(--cyan); margin-bottom: 20px; display: block; }
+    /* Review Badge */
+    .review-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.05); padding: 8px 15px; border-radius: 99px; font-size: 13px; font-weight: 700; border: 1px solid var(--glass-border); }
+    .review-badge i { color: #facc15; }
 
     /* Action Dock */
-    .dock {
-      position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-      background: rgba(255,255,255,0.1); backdrop-filter: blur(20px);
-      padding: 10px 20px; border-radius: 99px; border: 1px solid var(--glass-border);
-      display: flex; gap: 15px; z-index: 3000; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-    }
-    .dock-btn { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; transition: 0.3s; }
-    .dock-btn.phone { background: #22c55e; }
-    .dock-btn.sms { background: var(--cyan); color: #000; }
+    .dock { position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%); background: rgba(3,10,26,0.6); backdrop-filter: blur(25px); padding: 12px 25px; border-radius: 99px; border: 1px solid var(--glass-border); display: flex; gap: 18px; z-index: 3000; box-shadow: 0 15px 50px rgba(0,0,0,0.6); }
+    .dock-btn { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.3rem; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); text-decoration: none; }
+    .dock-btn:hover { transform: scale(1.2); }
+    .phone { background: #22c55e; box-shadow: 0 0 15px rgba(34, 197, 94, 0.4); }
+    .sms { background: var(--cyan); color: #000; box-shadow: 0 0 15px rgba(0, 242, 255, 0.4); }
 
-    .btn-glow {
-      background: var(--cyan); color: #020617; padding: 18px 40px; border-radius: 99px;
-      font-weight: 800; text-decoration: none; display: inline-block;
-      box-shadow: 0 0 25px var(--cyan); transition: 0.3s; text-transform: uppercase; border: none; cursor: pointer;
-    }
+    .btn-glow { background: var(--cyan); color: #020617; padding: 20px 45px; border-radius: 99px; font-weight: 800; text-decoration: none; display: inline-block; box-shadow: 0 0 30px var(--cyan); transition: 0.3s; text-transform: uppercase; border: none; cursor: pointer; font-size: 14px; }
   </style>
 </head>
 <body>
+
+  <div class="bubble" style="top: 15%; left: 8%; width: 130px; height: 130px;">
+    <i class="fas fa-layer-group"></i>
+    <span>NEW & USED<br>TIRES</span>
+  </div>
+  <div class="bubble" style="top: 55%; right: 7%; width: 160px; height: 160px; animation-delay: 2s;">
+    <i class="fas fa-hammer"></i>
+    <span>PROFESSIONAL<br>RIM REPAIR</span>
+  </div>
+  <div class="bubble" style="bottom: 20%; left: 12%; width: 120px; height: 120px; animation-delay: 4s;">
+    <i class="fas fa-gem"></i>
+    <span>ALLOY & STEEL<br>RIMS</span>
+  </div>
 
   <div class="ticker">
     <div class="ticker-content">
@@ -87,16 +85,10 @@
       <span>⚡ MOBILE TIRE CHANGE</span>
       <span>🛠️ FLAT REPAIR</span>
       <span>⚖️ OFF-RIM BALANCING</span>
-      <span>📍 SERVING GTA & DURHAM REGION</span>
+      <span>📦 NEW & USED TIRES IN STOCK</span>
+      <span>💎 RIM REPAIR & NEW RIMS</span>
       <span>🚨 EMERGENCY 24/7 SERVICE AVAILABLE</span>
-      <span>⚡ MOBILE TIRE CHANGE</span>
-      <span>🛠️ FLAT REPAIR</span>
-      <span>⚖️ OFF-RIM BALANCING</span>
     </div>
-  </div>
-
-  <div class="status-bar">
-    <span class="pulse"></span> LIVE STATUS: <span style="color:var(--cyan)">ONLINE</span> • CURRENT AREA: <span style="color:var(--cyan)">DURHAM / GTA</span>
   </div>
 
   <div class="video-container">
@@ -109,56 +101,74 @@
   <div class="dock">
     <a href="tel:+16479202080" class="dock-btn phone"><i class="fas fa-phone"></i></a>
     <a href="sms:+16479202080" class="dock-btn sms"><i class="fas fa-comment"></i></a>
-    <a href="#quote" class="btn-glow" style="padding: 15px 25px; font-size: 12px;">Get Quote</a>
+    <a href="https://wa.me/16479202080" class="dock-btn" style="background:#25D366;"><i class="fab fa-whatsapp"></i></a>
+    <a href="#quote" class="btn-glow" style="padding: 15px 25px; font-size: 12px; margin-left:10px;">Get Quote</a>
   </div>
 
   <main class="container">
     <section class="hero" data-aos="fade-right">
-      <h1>MOBILE TIRE <br><span>EXPERTS.</span></h1>
-      <p style="max-width: 600px; font-size: 1.3rem; color: #cbd5e1; margin-bottom: 35px;">
-        High-performance mobile tire service. Seasonal swaps, flat repairs, and precision balancing delivered to your driveway.
+      <div class="review-badge">
+        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+        <span>5.0 RATED SERVICE</span>
+      </div>
+      <h1>THE SHOP<br><span>ON CALL.</span></h1>
+      <p style="max-width: 650px; font-size: 1.4rem; color: #cbd5e1; margin-bottom: 40px; font-weight: 300;">
+        Elite mobile tire changes, flat repairs, and balancing across GTA & Durham. 
+        We supply tires and repair rims at your driveway.
       </p>
-      <a href="tel:+16479202080" class="btn-glow">Call Now</a>
+      <div><a href="tel:+16479202080" class="btn-glow">Call Now</a></div>
     </section>
 
     <div class="grid">
       <div class="glass-card" data-aos="fade-up">
         <i class="fas fa-snowflake"></i>
         <h3>Seasonal Swap</h3>
-        <p>Swift on-rim tire changes for summer or winter sets.</p>
+        <p>Rapid on-rim swaps and TPMS resets for winter/summer sets.</p>
       </div>
       <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
-        <i class="fas fa-wrench"></i>
+        <i class="fas fa-screwdriver-wrench"></i>
         <h3>Flat Repair</h3>
-        <p>Rapid response for punctures, bead leaks, and valve stems.</p>
+        <p>Expert puncture repair, bead sealing, and valve stem service.</p>
       </div>
       <div class="glass-card" data-aos="fade-up" data-aos-delay="200">
-        <i class="fas fa-balance-scale"></i>
+        <i class="fas fa-gauge-high"></i>
         <h3>Off-Rim Balance</h3>
-        <p>Full off-rim installation with precision computer balancing.</p>
+        <p>On-site mounting and precision balancing for a smooth ride.</p>
       </div>
     </div>
 
-    <section id="quote" style="padding-bottom: 150px;">
-      <div class="glass-card" style="max-width: 700px; margin: 0 auto;" data-aos="zoom-in">
-        <h2 style="font-size: 2.5rem; margin-bottom: 30px;">Request Service</h2>
-        <form onsubmit="sendEmail(event)" style="display: grid; gap: 15px;">
-          <input type="text" id="custName" placeholder="Full Name" required style="width:100%; background:rgba(255,255,255,0.05); border:1px solid var(--glass-border); padding:15px; border-radius:12px; color:#fff;">
-          <input type="text" id="custPhone" placeholder="Phone Number" required style="width:100%; background:rgba(255,255,255,0.05); border:1px solid var(--glass-border); padding:15px; border-radius:12px; color:#fff;">
-          <textarea id="custDetails" placeholder="Tire size and location..." style="width:100%; background:rgba(255,255,255,0.05); border:1px solid var(--glass-border); padding:15px; border-radius:12px; color:#fff; height:100px;"></textarea>
-          <button type="submit" class="btn-glow" style="width:100%;">Submit Request</button>
+    <section id="quote" style="padding-bottom: 200px;">
+      <div class="glass-card" style="max-width: 750px; margin: 0 auto;" data-aos="zoom-in">
+        <h2 style="font-size: 2.8rem; margin-bottom: 35px; letter-spacing: -1px;">Ready to Book?</h2>
+        <form onsubmit="sendEmail(event)" style="display: grid; gap: 18px;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px;">
+            <input type="text" id="custName" placeholder="Full Name" required style="width:100%; background:rgba(255,255,255,0.05); border:1px solid var(--glass-border); padding:18px; border-radius:15px; color:#fff;">
+            <input type="text" id="custPhone" placeholder="Phone Number" required style="width:100%; background:rgba(255,255,255,0.05); border:1px solid var(--glass-border); padding:18px; border-radius:15px; color:#fff;">
+          </div>
+          <select id="custService" style="width:100%; background:rgba(255,255,255,0.05); border:1px solid var(--glass-border); padding:18px; border-radius:15px; color:#fff;">
+            <option>On-Rim Tire Swap</option>
+            <option>Flat Tire Repair</option>
+            <option>Off-Rim Mount & Balance</option>
+            <option>New/Used Tires & Rims</option>
+          </select>
+          <textarea id="custDetails" placeholder="Tire size, city, and preferred time..." style="width:100%; background:rgba(255,255,255,0.05); border:1px solid var(--glass-border); padding:18px; border-radius:15px; color:#fff; height:120px;"></textarea>
+          <button type="submit" class="btn-glow" style="width:100%; border:none;">Submit Booking Request</button>
         </form>
       </div>
     </section>
   </main>
+
+  <footer style="padding: 80px 0; border-top: 1px solid var(--glass-border); text-align: center; color: rgba(255,255,255,0.3);">
+    <p>© 2025 TheMobileTire. Professional Mobile Service GTA & Durham.</p>
+  </footer>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     AOS.init({ duration: 1000, once: true });
     function sendEmail(e) {
       e.preventDefault();
-      const body = `Name: ${document.getElementById('custName').value}%0D%0APhone: ${document.getElementById('custPhone').value}%0D%0ADetails: ${document.getElementById('custDetails').value}`;
-      window.location.href = `mailto:mirzaartslan@gmail.com?subject=New Booking&body=${body}`;
+      const body = `Name: ${document.getElementById('custName').value}%0D%0APhone: ${document.getElementById('custPhone').value}%0D%0AService: ${document.getElementById('custService').value}%0D%0ADetails: ${document.getElementById('custDetails').value}`;
+      window.location.href = `mailto:mirzaartslan@gmail.com?subject=New Booking Request&body=${body}`;
     }
   </script>
 </body>
