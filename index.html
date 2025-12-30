@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>TheMobileTire | Elite Mobile Tire Command</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>TheMobileTire | Elite Command</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;500;800&display=swap" rel="stylesheet">
@@ -13,154 +13,126 @@
   <style>
     :root {
       --cyan: #00f2ff;
-      --glass: rgba(255, 255, 255, 0.03);
-      --glass-border: rgba(255, 255, 255, 0.08);
+      --glass: rgba(255, 255, 255, 0.12); /* Brighter glass base */
+      --glass-border: rgba(255, 255, 255, 0.25); /* Stronger border contrast */
       --bg: #010204;
+      --text-dim: #d1d5db; /* Much brighter than the old gray */
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Manrope', sans-serif; background-color: var(--bg); color: #fff; overflow-x: hidden; line-height: 1.6; }
-    .container { max-width: 1300px; margin: 0 auto; padding: 0 40px; }
+    body { font-family: 'Manrope', sans-serif; background-color: var(--bg); color: #fff; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
-    /* Clean Ticker */
-    .ticker {
-      width: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--glass-border); color: var(--cyan);
-      font-weight: 800; text-transform: uppercase; font-size: 11px; letter-spacing: 3px;
-      padding: 12px 0; position: fixed; top: 0; z-index: 2000; overflow: hidden;
+    /* Video Playback Fix */
+    .video-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; background: #000; }
+    .video-container video { width: 100%; height: 100%; object-fit: cover; opacity: 0.4; }
+    .vignette { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, transparent 10%, var(--bg) 95%); z-index: -1; }
+
+    /* Top Ticker - Simplified */
+    .ticker-wrap {
+      position: fixed; top: 0; width: 100%; z-index: 2000;
+      background: rgba(0,0,0,0.95); backdrop-filter: blur(15px);
+      border-bottom: 1px solid var(--glass-border);
+      padding: 10px 0; font-size: 10px; font-weight: 800;
+      letter-spacing: 2px; color: var(--cyan); text-transform: uppercase;
     }
-    .ticker-content { display: inline-block; animation: ticker 45s linear infinite; }
-    .ticker-content span { padding-right: 80px; }
-    @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    .ticker-move { display: inline-block; white-space: nowrap; animation: ticker-kf 35s linear infinite; }
+    .ticker-move span { padding-right: 50px; }
+    @keyframes ticker-kf { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-    /* Video & Layers */
-    .video-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; }
-    .video-container video { width: 100%; height: 100%; object-fit: cover; opacity: 0.3; filter: saturate(0.5); }
-    .vignette { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, transparent 20%, var(--bg) 90%); z-index: -1; }
+    /* Hero Section */
+    .container { max-width: 1300px; margin: 0 auto; padding: 0 20px; }
+    .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 100px 20px; }
+    .hero h1 { font-size: clamp(3.2rem, 15vw, 7.5rem); font-weight: 800; letter-spacing: -3px; line-height: 0.9; margin-bottom: 25px; }
+    .hero h1 span { color: var(--cyan); text-shadow: 0 0 30px rgba(0, 242, 255, 0.4); }
+    .hero p { max-width: 600px; color: var(--text-dim); font-size: 16px; letter-spacing: 0.5px; line-height: 1.6; }
 
-    /* Professional Hero */
-    .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-    .hero h1 { font-size: clamp(3rem, 12vw, 7.5rem); font-weight: 800; letter-spacing: -6px; line-height: 0.8; margin-bottom: 30px; }
-    .hero h1 span { color: var(--cyan); text-shadow: 0 0 50px rgba(0, 242, 255, 0.3); }
-    .hero p { max-width: 650px; font-size: 1.2rem; color: #888; font-weight: 300; letter-spacing: 1px; }
-
-    /* Structured Grid */
-    .tech-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 80px; }
+    /* Brighter Tech Panels */
+    .tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 60px 0; }
     .tech-card {
-      background: var(--glass); border: 1px solid var(--glass-border); padding: 40px; border-radius: 4px;
-      transition: 0.5s cubic-bezier(0.2, 1, 0.3, 1); position: relative; overflow: hidden;
+      background: var(--glass); border: 1px solid var(--glass-border); padding: 35px; border-radius: 12px;
+      backdrop-filter: blur(20px); transition: 0.4s ease;
     }
-    .tech-card:hover { border-color: var(--cyan); background: rgba(255,255,255,0.05); }
-    .tech-card i { color: var(--cyan); font-size: 1.5rem; margin-bottom: 25px; display: block; }
-    .tech-card h3 { font-size: 1.1rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px; }
-    .tech-card p { font-size: 0.9rem; color: #666; font-weight: 500; }
+    .tech-card:hover { border-color: var(--cyan); background: rgba(255, 255, 255, 0.18); }
+    .tech-card h3 { font-size: 1.2rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px; color: #fff; }
+    .tech-card p { color: var(--text-dim); font-size: 15px; }
 
-    /* Data Points */
-    .data-row { display: flex; justify-content: space-between; border-top: 1px solid var(--glass-border); padding-top: 20px; margin-top: 20px; }
-    .data-point { font-size: 10px; font-weight: 800; letter-spacing: 1px; color: #444; }
-
-    /* Footer Dock */
+    /* Mobile Friendly Dock */
     .dock {
-      position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%);
-      display: flex; gap: 10px; z-index: 1000;
+      position: fixed; bottom: 0; left: 0; width: 100%;
+      display: grid; grid-template-columns: 1fr 1fr;
+      background: rgba(1, 2, 4, 0.98); backdrop-filter: blur(20px);
+      border-top: 1px solid var(--glass-border); z-index: 3000;
     }
-    .dock-btn {
-      background: rgba(255,255,255,0.05); backdrop-filter: blur(20px);
-      border: 1px solid var(--glass-border); color: #fff; padding: 15px 30px;
-      border-radius: 2px; font-weight: 800; text-transform: uppercase;
-      font-size: 12px; letter-spacing: 2px; transition: 0.3s; text-decoration: none;
+    .dock-btn { 
+      padding: 22px 10px; font-weight: 800; font-size: 11px; 
+      letter-spacing: 2px; text-decoration: none; text-align: center;
+      text-transform: uppercase; color: #fff;
     }
-    .dock-btn:hover { background: var(--cyan); color: #000; border-color: var(--cyan); }
+    .deploy-btn { background: var(--cyan); color: #000; }
 
-    @media (max-width: 900px) { .tech-grid { grid-template-columns: 1fr; } .hero h1 { letter-spacing: -2px; } }
+    @media (min-width: 768px) {
+      .dock { bottom: 30px; left: 50%; transform: translateX(-50%); width: auto; border-radius: 8px; border: 1px solid var(--glass-border); padding: 0 10px; }
+      .dock-btn { padding: 15px 30px; }
+    }
+
+    input, textarea { width: 100%; background: rgba(255,255,255,0.08); border: 1px solid var(--glass-border); padding: 18px; border-radius: 12px; color: #fff; margin-bottom: 15px; font-family: inherit; font-size: 14px; }
+    ::placeholder { color: #aaa; }
   </style>
 </head>
 <body>
 
-  <div class="ticker">
-    <div class="ticker-content">
-      <span>SYSTEM STATUS: OPERATIONAL</span>
-      <span>• EMERGENCY 24/7 MOBILE TIRE RESPONSE</span>
-      <span>• ON-SITE SEASONAL SWAPS</span>
-      <span>• PRECISION OFF-RIM BALANCING</span>
-      <span>• SERVING GTA & DURHAM REGION</span>
-      <span>• SYSTEM STATUS: OPERATIONAL</span>
-    </div>
-  </div>
-
   <div class="video-container">
-    <video autoplay muted loop playsinline>
+    <video autoplay muted loop playsinline id="bgVideo">
       <source src="sprinter-bg.mp4" type="video/mp4">
     </video>
   </div>
   <div class="vignette"></div>
 
-  <div class="dock">
-    <a href="tel:+16479202080" class="dock-btn">Call Technical Support</a>
-    <a href="#quote" class="dock-btn" style="background:var(--cyan); color:#000;">Deploy Technician</a>
+  <div class="ticker-wrap">
+    <div class="ticker-move">
+      <span>SYSTEM STATUS: OPERATIONAL</span>
+      <span>• EMERGENCY 24/7 MOBILE TIRE</span>
+      <span>• SERVING GTA & DURHAM REGION</span>
+      <span>• ON-SITE SEASONAL SWAPS</span>
+      <span>• SYSTEM STATUS: OPERATIONAL</span>
+    </div>
   </div>
+
+  <nav class="dock">
+    <a href="tel:+16479202080" class="dock-btn">Call Technical</a>
+    <a href="#quote" class="dock-btn deploy-btn">Deploy Service</a>
+  </nav>
 
   <main class="container">
     <section class="hero" data-aos="fade-up">
-      <div style="font-size: 10px; letter-spacing: 5px; color: var(--cyan); margin-bottom: 10px; font-weight: 800;">GTA • DURHAM • 24/7</div>
+      <div style="font-size: 10px; letter-spacing: 5px; color: var(--cyan); margin-bottom: 20px; font-weight: 800;">MISSION • CRITICAL • 24/7</div>
       <h1>THE MOBILE<br><span>TIRE.</span></h1>
-      <p>Precision tire swaps, flat repairs, and balancing delivered at your location. The modern standard for automotive service.</p>
+      <p>The elite standard for on-site automotive service. Precision tire swaps, flat repairs, and balancing delivered directly to your driveway.</p>
     </section>
 
     <div class="tech-grid">
       <div class="tech-card" data-aos="fade-up">
-        <i class="fas fa-snowflake"></i>
         <h3>Seasonal Swap</h3>
-        <p>Expert transitions for summer and winter tire sets on your driveway.</p>
-        <div class="data-row">
-          <div class="data-point">ID: SWAP-01</div>
-          <div class="data-point">STATUS: AVAILABLE</div>
-        </div>
+        <p>Expert winter and summer tire transitions performed at your home or work location.</p>
       </div>
-
       <div class="tech-card" data-aos="fade-up" data-aos-delay="100">
-        <i class="fas fa-microchip"></i>
         <h3>Flat Repair</h3>
-        <p>Rapid response for punctures, bead leaks, and sensor resets.</p>
-        <div class="data-row">
-          <div class="data-point">ID: REPAIR-02</div>
-          <div class="data-point">STATUS: ACTIVE</div>
-        </div>
+        <p>Rapid response for punctures, bead leaks, and electronic TPMS sensor resets.</p>
       </div>
-
       <div class="tech-card" data-aos="fade-up" data-aos-delay="200">
-        <i class="fas fa-crosshairs"></i>
-        <h3>Off-Rim Balance</h3>
-        <p>Precision mounting and electronic computer balancing on-site.</p>
-        <div class="data-row">
-          <div class="data-point">ID: BAL-03</div>
-          <div class="data-point">STATUS: OPTIMAL</div>
-        </div>
+        <h3>Inventory & Repair</h3>
+        <p>Authorized dealer for new/used tires from Michelin and Pirelli. Professional on-site rim repair services.</p>
       </div>
     </div>
 
-    <section id="inventory" style="padding-bottom: 100px;">
-      <div class="tech-card" style="display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 40px;" data-aos="fade-up">
-        <div>
-          <h3>Inventory & Repair</h3>
-          <p style="margin-top: 10px;">We stock new/used tires from Michelin and Pirelli, alongside professional rim repair and alloy rim sales.</p>
-        </div>
-        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-          <span style="border: 1px solid #333; padding: 10px 20px; font-size: 10px; font-weight: 800; letter-spacing: 2px;">NEW TIRES</span>
-          <span style="border: 1px solid #333; padding: 10px 20px; font-size: 10px; font-weight: 800; letter-spacing: 2px;">USED TIRES</span>
-          <span style="border: 1px solid #333; padding: 10px 20px; font-size: 10px; font-weight: 800; letter-spacing: 2px;">RIM REPAIR</span>
-        </div>
-      </div>
-    </section>
-
     <section id="quote" style="padding-bottom: 150px;">
-      <div class="tech-card" style="max-width: 600px; margin: 0 auto;" data-aos="zoom-in">
-        <h3 style="text-align: center;">Service Request</h3>
-        <form onsubmit="sendEmail(event)" style="margin-top: 30px;">
-          <input type="text" id="cName" placeholder="CLIENT NAME" required style="background:transparent; border:none; border-bottom:1px solid #333; padding: 15px 0; border-radius: 0; margin-bottom: 20px;">
-          <input type="text" id="cPhone" placeholder="CONTACT NUMBER" required style="background:transparent; border:none; border-bottom:1px solid #333; padding: 15px 0; border-radius: 0; margin-bottom: 20px;">
-          <textarea id="cDetails" placeholder="TIRE SIZE & LOCATION DATA" style="background:transparent; border:none; border-bottom:1px solid #333; padding: 15px 0; border-radius: 0; margin-bottom: 20px; height: 80px;"></textarea>
-          <button type="submit" class="dock-btn" style="width: 100%; cursor: pointer; border: none;">Initiate Deployment</button>
+      <div class="tech-card" style="max-width: 650px; margin: 0 auto; background: rgba(255,255,255,0.15);" data-aos="zoom-in">
+        <h3 style="text-align: center; margin-bottom: 35px;">Service Deployment Request</h3>
+        <form onsubmit="sendEmail(event)">
+          <input type="text" id="cName" placeholder="CLIENT NAME" required>
+          <input type="text" id="cPhone" placeholder="CONTACT NUMBER" required>
+          <textarea id="cDetails" placeholder="TIRE SIZE, LOCATION DATA & SERVICE TYPE" required style="height: 100px;"></textarea>
+          <button type="submit" class="dock-btn deploy-btn" style="width: 100%; border: none; cursor: pointer; border-radius: 8px;">Initiate Deployment</button>
         </form>
       </div>
     </section>
@@ -168,7 +140,18 @@
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    AOS.init({ duration: 1500, once: true });
+    AOS.init({ duration: 1500 });
+    
+    // MASTER VIDEO FIX: Triggers play on any interaction
+    const video = document.getElementById('bgVideo');
+    const startVideo = () => {
+        video.play().catch(e => console.log("Auto-play blocked, waiting for interaction"));
+    };
+    
+    window.addEventListener('touchstart', startVideo, {once: true});
+    window.addEventListener('scroll', startVideo, {once: true});
+    window.addEventListener('click', startVideo, {once: true});
+
     function sendEmail(e) {
       e.preventDefault();
       const body = `Client: ${document.getElementById('cName').value}%0D%0APhone: ${document.getElementById('cPhone').value}%0D%0AData: ${document.getElementById('cDetails').value}`;
