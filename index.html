@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>TheMobileTire | Premium Mobile Tire Service</title>
+  <title>TheMobileTire | GTA & Durham Mobile Tire Shop</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&display=swap" rel="stylesheet">
@@ -13,172 +13,168 @@
   <style>
     :root {
       --cyan: #00f2ff;
-      --blue: #0066ff;
-      --glass: rgba(255, 255, 255, 0.1);
-      --glass-border: rgba(255, 255, 255, 0.2);
-      --bg: #030a1a;
+      --glass: rgba(255, 255, 255, 0.08);
+      --glass-border: rgba(255, 255, 255, 0.15);
+      --bg: #020617;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { 
-      font-family: 'Manrope', sans-serif; 
-      background-color: var(--bg); 
-      color: #fff; 
-      overflow-x: hidden;
-      line-height: 1.6;
-    }
+    body { font-family: 'Manrope', sans-serif; background-color: var(--bg); color: #fff; overflow-x: hidden; }
 
-    /* High-Speed Background */
-    .motion-bg {
+    /* Cinematic Video Background */
+    .video-container {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      z-index: -2;
-      background: linear-gradient(45deg, #030a1a, #051a3d);
+      z-index: -2; overflow: hidden;
     }
-    .motion-bg::after {
-      content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      background: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=2070&auto=format&fit=crop') center/cover;
-      opacity: 0.2; filter: blur(2px) grayscale(1);
+    .video-container video {
+      min-width: 100%; min-height: 100%; object-fit: cover; opacity: 0.45;
+    }
+    .video-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: radial-gradient(circle at center, transparent, var(--bg));
+      z-index: -1;
     }
 
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 25px; }
 
-    /* Frosted Header */
     header {
       position: fixed; top: 0; width: 100%; z-index: 1000;
-      background: rgba(3, 10, 26, 0.7); backdrop-filter: blur(20px);
+      background: rgba(2, 6, 23, 0.6); backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--glass-border);
     }
-    .nav-inner { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; }
+    .nav-inner { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; }
 
-    /* Hero Section */
-    .hero {
-      height: 100vh; display: flex; flex-direction: column; 
-      justify-content: center; align-items: center; text-align: center;
-    }
-    .hero h1 {
-      font-size: clamp(3rem, 10vw, 6rem); font-weight: 800; line-height: 0.9;
-      background: linear-gradient(to right, #fff, var(--cyan));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      margin-bottom: 20px;
-    }
+    /* Hero */
+    .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; }
+    .hero h1 { font-size: clamp(3.5rem, 10vw, 6.5rem); font-weight: 800; line-height: 0.85; letter-spacing: -4px; margin: 20px 0; }
+    .hero span { color: var(--cyan); text-shadow: 0 0 30px rgba(0, 242, 255, 0.5); }
 
     /* Glass Cards */
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-top: 50px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; margin-top: 50px; }
     .glass-card {
-      background: var(--glass);
-      backdrop-filter: blur(15px);
-      border: 1px solid var(--glass-border);
-      border-radius: 24px; padding: 40px;
-      transition: 0.4s ease;
-      position: relative;
+      background: var(--glass); backdrop-filter: blur(15px);
+      border: 1px solid var(--glass-border); border-radius: 28px; padding: 45px;
+      transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
-    .glass-card:hover {
-      background: rgba(255, 255, 255, 0.15);
-      border-color: var(--cyan);
-      box-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
-      transform: translateY(-10px);
-    }
-    .glass-card i { font-size: 2.5rem; color: var(--cyan); margin-bottom: 20px; display: block; }
-    
+    .glass-card:hover { border-color: var(--cyan); transform: translateY(-10px); background: rgba(255,255,255,0.12); }
+    .glass-card i { font-size: 2.5rem; color: var(--cyan); margin-bottom: 25px; display: block; }
+
     .btn-glow {
-      background: var(--cyan); color: #030a1a;
-      padding: 16px 40px; border-radius: 99px; font-weight: 800;
-      text-decoration: none; display: inline-block;
-      box-shadow: 0 0 20px var(--cyan); transition: 0.3s;
-      text-transform: uppercase; border: none; cursor: pointer;
+      background: var(--cyan); color: #020617; padding: 18px 40px; border-radius: 99px;
+      font-weight: 800; text-decoration: none; display: inline-block;
+      box-shadow: 0 0 25px var(--cyan); transition: 0.3s; text-transform: uppercase;
+      border: none; cursor: pointer;
     }
-    .btn-glow:hover { transform: scale(1.05); box-shadow: 0 0 40px var(--cyan); }
+    .btn-glow:hover { transform: scale(1.05); box-shadow: 0 0 45px var(--cyan); }
 
-    /* Service List */
     ul { list-style: none; margin-top: 20px; }
-    li { margin-bottom: 10px; display: flex; align-items: center; gap: 10px; font-size: 0.95rem; }
-    li i { font-size: 1rem !important; margin: 0 !important; }
+    li { margin-bottom: 12px; display: flex; align-items: center; gap: 10px; color: #cbd5e1; }
+    li i { font-size: 1rem !important; margin: 0 !important; color: var(--cyan) !important; }
 
+    #booking { background: rgba(0,0,0,0.4); border: 1px solid var(--glass-border); border-radius: 24px; padding: 40px; margin-top: 50px; }
+    input, select, textarea { width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); padding: 15px; border-radius: 12px; color: #fff; margin-bottom: 15px; font-family: inherit; }
   </style>
 </head>
 <body>
 
-  <div class="motion-bg"></div>
+  <div class="video-container">
+    <video autoplay muted loop playsinline>
+      <source src="sprinter-bg.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="video-overlay"></div>
 
   <header>
     <div class="container nav-inner">
-      <div style="font-weight: 800; font-size: 1.5rem; letter-spacing: -1px;">TheMobileTire</div>
-      <a href="tel:+16479202080" class="btn-glow" style="padding: 10px 25px; font-size: 14px;">(647) 920-2080</a>
+      <div style="font-weight: 800; font-size: 1.6rem; letter-spacing: -1px;">TheMobileTire</div>
+      <a href="tel:+16479202080" class="btn-glow" style="padding: 12px 25px; font-size: 13px;">(647) 920-2080</a>
     </div>
   </header>
 
-  <section class="hero" data-aos="zoom-out">
-    <div class="container">
-      <p style="text-transform: uppercase; letter-spacing: 5px; color: var(--cyan); font-weight: 700; margin-bottom: 10px;">GTA & Durham Region</p>
-      <h1>WE COME <br> TO YOU.</h1>
-      <p style="max-width: 600px; margin: 20px auto 40px; color: rgba(255,255,255,0.7); font-size: 1.2rem;">
-        Professional mobile tire swaps, flat repairs, and mounting on your schedule. 
-        Premium service delivered to your driveway.
+  <main class="container">
+    <section class="hero" data-aos="fade-right">
+      <p style="letter-spacing: 4px; color: var(--cyan); font-weight: 800;">SERVING GTA & DURHAM</p>
+      <h1>MOBILE TIRE <br><span>EXPERTS.</span></h1>
+      <p style="max-width: 600px; font-size: 1.3rem; color: #cbd5e1; margin-bottom: 35px;">
+        Professional tire changes at your doorstep. We bring the shop to you across the GTA and Durham region.
       </p>
-      <a href="#quote" class="btn-glow">Book Now</a>
-    </div>
-  </section>
+      <div>
+        <a href="#quote-section" class="btn-glow">Book Now</a>
+      </div>
+    </section>
 
-  <main class="container" style="padding-bottom: 100px;">
     <div class="grid">
       <div class="glass-card" data-aos="fade-up">
-        <i class="fas fa-arrows-rotate"></i>
-        <h3>Mobile Tire Swap</h3>
+        <i class="fas fa-snowflake"></i>
+        <h3>Seasonal Swap</h3>
+        <p>Swift on-rim tire changes for summer or winter sets.</p>
         <ul>
-          <li><i class="fas fa-check"></i> Seasonal On-Rim Swaps</li>
-          <li><i class="fas fa-check"></i> Off-Rim Installation</li>
-          <li><i class="fas fa-check"></i> Wheel Balancing</li>
-          <li><i class="fas fa-check"></i> TPMS Reset included</li>
+          <li><i class="fas fa-check"></i> On-Rim Tire Swaps</li>
+          <li><i class="fas fa-check"></i> Pressure Correction</li>
+          <li><i class="fas fa-check"></i> TPMS Reset Included</li>
         </ul>
       </div>
 
       <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
         <i class="fas fa-wrench"></i>
-        <h3>Fix Flat Tire</h3>
+        <h3>Flat Repair</h3>
+        <p>Rapid response for punctures, bead leaks, and valve stems.</p>
         <ul>
-          <li><i class="fas fa-check"></i> Rapid Roadside Response</li>
-          <li><i class="fas fa-check"></i> Puncture Patch & Repair</li>
-          <li><i class="fas fa-check"></i> Valve Stem Service</li>
-          <li><i class="fas fa-check"></i> Spare Tire Swaps</li>
+          <li><i class="fas fa-check"></i> Professional Plug & Patch</li>
+          <li><i class="fas fa-check"></i> Valve Stem Replacement</li>
+          <li><i class="fas fa-check"></i> Bead Leak Sealing</li>
         </ul>
       </div>
 
       <div class="glass-card" data-aos="fade-up" data-aos-delay="200">
-        <i class="fas fa-tire"></i>
-        <h3>New Tires & Rims</h3>
+        <i class="fas fa-balance-scale"></i>
+        <h3>Mount & Balance</h3>
+        <p>Full off-rim installation with precision computer balancing.</p>
         <ul>
-          <li><i class="fas fa-check"></i> Major Brands Delivered</li>
-          <li><i class="fas fa-check"></i> Custom Rim Packages</li>
-          <li><i class="fas fa-check"></i> Winter/Summer Options</li>
-          <li><i class="fas fa-check"></i> Fleet Services Available</li>
+          <li><i class="fas fa-check"></i> Off-Rim Mounting</li>
+          <li><i class="fas fa-check"></i> Computer Wheel Balancing</li>
+          <li><i class="fas fa-check"></i> New Tires & Rims Available</li>
         </ul>
       </div>
     </div>
 
-    <section id="quote" style="margin-top: 100px; text-align: center;" data-aos="fade-up">
-      <div class="glass-card" style="max-width: 700px; margin: 0 auto;">
-        <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Get Your Quote</h2>
-        <form onsubmit="return false;" style="display: grid; gap: 15px;">
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-            <input type="text" placeholder="Name" style="background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); padding: 15px; border-radius: 12px; color: #fff;">
-            <input type="text" placeholder="Phone" style="background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); padding: 15px; border-radius: 12px; color: #fff;">
-          </div>
-          <select style="background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); padding: 15px; border-radius: 12px; color: #fff;">
-            <option>Tire Swap</option>
-            <option>Fix Flat</option>
-            <option>New Tires</option>
+    <section id="quote-section" style="padding: 100px 0;">
+      <div id="booking" data-aos="zoom-in">
+        <h2 style="font-size: 2.5rem; margin-bottom: 30px;">Get a Free Quote</h2>
+        <form onsubmit="sendEmail(event)" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+          <input type="text" id="custName" placeholder="Your Name" required>
+          <input type="text" id="custPhone" placeholder="Phone Number" required>
+          <select id="custService" style="grid-column: span 2;">
+            <option>Seasonal Tire Swap</option>
+            <option>Flat Tire Repair</option>
+            <option>Off-Rim Mount & Balance</option>
+            <option>New Tires & Rims</option>
           </select>
-          <button class="btn-glow" style="width: 100%;">Send Request</button>
+          <textarea id="custDetails" placeholder="Tire size and your city..." style="grid-column: span 2; height: 100px;"></textarea>
+          <button type="submit" class="btn-glow" style="grid-column: span 2;">Send Request</button>
         </form>
       </div>
     </section>
   </main>
 
-  <footer style="padding: 50px 0; border-top: 1px solid var(--glass-border); text-align: center; color: rgba(255,255,255,0.5);">
-    <p>© 2025 TheMobileTire. Serving Toronto, Oshawa, Ajax, & Oakville.</p>
+  <footer style="padding: 60px 0; border-top: 1px solid var(--glass-border); text-align: center; color: #475569;">
+    <p>© 2025 TheMobileTire. Professional Mobile Service across GTA & Durham.</p>
   </footer>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>AOS.init({ duration: 1000, once: true });</script>
+  <script>
+    AOS.init({ duration: 1000, once: true });
+
+    function sendEmail(e) {
+      e.preventDefault();
+      const name = document.getElementById('custName').value;
+      const phone = document.getElementById('custPhone').value;
+      const service = document.getElementById('custService').value;
+      const details = document.getElementById('custDetails').value;
+      
+      const body = `Name: ${name}%0D%0APhone: ${phone}%0D%0AService: ${service}%0D%0ADetails: ${details}`;
+      window.location.href = `mailto:mirzaartslan@gmail.com?subject=New Quote Request&body=${body}`;
+    }
+  </script>
 </body>
 </html>
