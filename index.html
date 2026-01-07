@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-  <title>TheMobileTire | Elite Mobile Command</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>TheMobileTire.ca — Mobile Tire Service | Ottawa • Gatineau • Quebec</title>
+
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;500;800&display=swap" rel="stylesheet">
@@ -14,48 +15,29 @@
     :root {
       --cyan: #00f2ff;
       --glass: rgba(255, 255, 255, 0.05);
-      --glass-border: rgba(255, 255, 255, 0.15);
+      --glass-border: rgba(255, 255, 255, 0.1);
       --bg: #010204;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    
-    /* FIX: Force vertical scrolling */
-    html, body {
-        height: auto;
-        min-height: 100%;
-        background-color: var(--bg);
-        color: #fff;
-        font-family: 'Manrope', sans-serif;
-        overflow-x: hidden;
-        overflow-y: auto !important;
-        -webkit-overflow-scrolling: touch;
-    }
+    body { font-family: 'Manrope', sans-serif; background-color: var(--bg); color: #fff; overflow-x: hidden; line-height: 1.6; overflow-y: auto; }
 
-    /* Ticker */
+    /* Airport Ticker */
     .ticker {
-      width: 100%; background: rgba(0,0,0,0.9); border-bottom: 1px solid var(--glass-border);
+      width: 100%; background: rgba(0,0,0,0.9); border-bottom: 1px solid var(--cyan);
       color: var(--cyan); font-weight: 800; text-transform: uppercase; font-size: 10px;
       padding: 12px 0; position: fixed; top: 0; z-index: 2000; overflow: hidden;
     }
-    .ticker-content { display: inline-block; animation: ticker 25s linear infinite; white-space: nowrap; }
+    .ticker-content { display: inline-block; animation: ticker 30s linear infinite; white-space: nowrap; }
     .ticker-content span { padding-right: 50px; }
     @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-    /* FIX: Video Layering */
-    .video-container { 
-        position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-        z-index: -10; /* Locked at the very bottom */
-        background: #000; 
-    }
-    .video-container video { 
-        width: 100%; height: 100%; object-fit: cover; 
-        opacity: 0.45; /* Lighter for better visibility */
-        filter: saturate(0.6); 
-    }
-    .vignette { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, transparent 20%, var(--bg) 95%); z-index: -5; pointer-events: none; }
+    /* Video Background Mobile Fix */
+    .video-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; background: #000; }
+    .video-container video { width: 100%; height: 100%; object-fit: cover; opacity: 0.45; filter: saturate(0.5); }
+    .vignette { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, transparent 20%, var(--bg) 95%); z-index: -1; pointer-events: none; }
 
-    /* Circular Pulse Dock */
+    /* Circular Pulse Action Dock */
     .dock-wrapper {
       position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
       background: rgba(15, 15, 15, 0.85); backdrop-filter: blur(25px);
@@ -80,99 +62,170 @@
       background: var(--cyan); color: #000; padding: 0 20px;
       height: 48px; border-radius: 100px; display: flex;
       align-items: center; font-weight: 800; font-size: 10px;
-      text-decoration: none; text-transform: uppercase; letter-spacing: 1px;
+      text-decoration: none; text-transform: uppercase;
     }
 
-    /* Content Styling */
-    .container { max-width: 1200px; margin: 0 auto; padding: 80px 20px; position: relative; z-index: 10; }
-    .hero { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-    .hero h1 { font-size: clamp(3.2rem, 15vw, 7.5rem); font-weight: 800; letter-spacing: -4px; line-height: 0.85; margin: 25px 0; }
-    .hero h1 span { color: var(--cyan); text-shadow: 0 0 35px rgba(0, 242, 255, 0.35); }
+    /* Hero & Container */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+    .hero h1 { font-size: clamp(3.5rem, 15vw, 8rem); font-weight: 800; letter-spacing: -4px; line-height: 0.85; margin: 20px 0; }
+    .hero h1 span { color: var(--cyan); text-shadow: 0 0 40px rgba(0, 242, 255, 0.4); }
 
-    .brand-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 30px 0; width: 100%; max-width: 600px; }
-    .brand-tile { background: rgba(0, 242, 255, 0.05); border: 1px solid var(--cyan); padding: 12px 5px; border-radius: 4px; text-align: center; font-weight: 800; font-size: 9px; color: var(--cyan); text-transform: uppercase; }
+    /* Brand Authority Row */
+    .brand-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin: 30px 0; opacity: 0.6; }
+    .brand-tag { border: 1px solid var(--glass-border); padding: 10px 20px; border-radius: 5px; font-size: 11px; font-weight: 800; text-transform: uppercase; }
 
+    /* Symmetrical Services Grid */
     .tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 60px 0; }
-    .tech-card { background: var(--glass); border: 1px solid var(--glass-border); padding: 40px; border-radius: 6px; backdrop-filter: blur(15px); }
-    .tech-card i { color: var(--cyan); font-size: 1.8rem; margin-bottom: 20px; display: block; }
-    
-    .reviews-ticker-wrapper { width: 100%; background: rgba(0,0,0,0.3); border-top: 1px solid var(--glass-border); padding: 60px 0; overflow: hidden; white-space: nowrap; margin-bottom: 120px; }
-    .reviews-content { display: inline-block; animation: ticker 70s linear infinite; }
-    .review-item { display: inline-block; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 12px; padding: 30px; margin: 0 20px; width: 310px; vertical-align: top; white-space: normal; backdrop-filter: blur(10px); }
+    .tech-card {
+      background: var(--glass); border: 1px solid var(--glass-border); padding: 40px; border-radius: 8px;
+      backdrop-filter: blur(15px); position: relative;
+    }
+    .tech-card i { color: var(--cyan); font-size: 2rem; margin-bottom: 20px; display: block; }
+    .tech-card h3 { letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px; }
+
+    /* Infinite Review Ticker */
+    .reviews-ticker-wrapper { width: 100%; background: rgba(0,0,0,0.3); border-top: 1px solid var(--glass-border); padding: 60px 0; overflow: hidden; white-space: nowrap; margin-bottom: 100px; }
+    .reviews-content { display: inline-block; animation: ticker 80s linear infinite; }
+    .review-item { 
+      display: inline-block; background: var(--glass); border: 1px solid var(--glass-border); 
+      border-radius: 12px; padding: 30px; margin: 0 20px; width: 320px; 
+      vertical-align: top; white-space: normal; backdrop-filter: blur(10px);
+    }
+    .stars { color: #facc15; font-size: 14px; margin-bottom: 12px; }
   </style>
 </head>
 <body>
 
   <div class="ticker">
     <div class="ticker-content">
-      <span>🚨 EMERGENCY 24/7 SERVICE AVAILABLE • MOBILE TIRE CHANGE • FLAT REPAIR • OFF-RIM BALANCING • SERVING GTA & DURHAM REGION • </span>
-      <span>🚨 EMERGENCY 24/7 SERVICE AVAILABLE • MOBILE TIRE CHANGE • FLAT REPAIR • OFF-RIM BALANCING • SERVING GTA & DURHAM REGION • </span>
+      <span>🚨 EMERGENCY 24/7 SERVICE AVAILABLE</span>
+      <span>• MOBILE TIRE CHANGE</span>
+      <span>• FLAT REPAIR</span>
+      <span>• OFF-RIM BALANCING</span>
+      <span>• SERVING OTTAWA • GATINEAU • QUEBEC</span>
+      <span>• CALL/TEXT 647-308-2425</span>
     </div>
   </div>
 
   <div class="video-container">
-    <video autoplay muted loop playsinline>
+    <video autoplay muted loop playsinline preload="auto">
       <source src="sprinter-bg.mp4" type="video/mp4">
     </video>
   </div>
   <div class="vignette"></div>
 
   <div class="dock-wrapper">
-    <a href="tel:+16479202080" class="round-btn pulse-call"><i class="fas fa-phone"></i></a>
-    <a href="https://wa.me/16479202080" class="round-btn pulse-wa"><i class="fab fa-whatsapp"></i></a>
+    <a href="tel:+16473082425" class="round-btn pulse-call" aria-label="Call 647-308-2425"><i class="fas fa-phone"></i></a>
+    <a href="https://wa.me/16473082425" class="round-btn pulse-wa" aria-label="WhatsApp 647-308-2425"><i class="fab fa-whatsapp"></i></a>
     <a href="#quote" class="get-quote">Get Quote</a>
   </div>
 
   <main class="container">
-    <section class="hero">
-      <div style="font-size: 10px; letter-spacing: 4px; color: var(--cyan); font-weight: 800;">MISSION • CRITICAL • 24/7</div>
+    <section class="hero" data-aos="fade-up">
+      <div style="font-size: 10px; letter-spacing: 5px; color: var(--cyan); font-weight: 800;">MISSION • CRITICAL • 24/7</div>
       <h1>THE MOBILE<br><span>TIRE.</span></h1>
-      
-      <div class="brand-grid">
-        <div class="brand-tile">Michelin</div><div class="brand-tile">Bridgestone</div>
-        <div class="brand-tile">Pirelli</div><div class="brand-tile">Continental</div>
-        <div class="brand-tile">Goodyear</div><div class="brand-tile">Hankook</div>
-      </div>
+    <p style="
+  max-width: 720px;
+  margin-top: 20px;
+  padding: 16px 22px;
+  background: rgba(0,242,255,0.08);
+  border: 1px solid rgba(0,242,255,0.45);
+  border-radius: 8px;
+  color: #eaffff;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 12px rgba(0,242,255,0.25);
+">
+  🚗 <strong>PRECISION TIRE SWAPS</strong> • <strong>FLAT REPAIRS</strong> • <strong>BALANCING</strong><br>
+  Delivered directly to your driveway across <strong>Ottawa • Gatineau • Quebec</strong>
+</p>
 
-      <p style="color: #999; font-weight: 300; max-width: 550px;">The elite standard for on-site automotive service. Precision tire swaps and balancing delivered directly to your driveway.</p>
+
+	<!-- BIG HERO CTA -->
+<div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:26px;">
+  <a href="tel:+16473082425"
+     style="display:inline-flex; align-items:center; justify-content:center; gap:12px;
+            padding:18px 28px; border-radius:10px;
+            background:#22c55e; color:#000; font-weight:800;
+            text-decoration:none; text-transform:uppercase; letter-spacing:2px;
+            box-shadow:0 18px 50px rgba(34,197,94,.35);
+            border:1px solid rgba(255,255,255,.12);
+            min-width:260px;">
+    <i class="fas fa-phone"></i> CALL 647-308-2425
+  </a>
+
+  <a href="sms:+16473082425"
+     style="display:inline-flex; align-items:center; justify-content:center; gap:12px;
+            padding:18px 28px; border-radius:10px;
+            background:var(--cyan); color:#000; font-weight:800;
+            text-decoration:none; text-transform:uppercase; letter-spacing:2px;
+            box-shadow:0 18px 50px rgba(0,242,255,.25);
+            border:1px solid rgba(255,255,255,.12);
+            min-width:260px;">
+    <i class="fas fa-comment-dots"></i> TEXT FOR QUOTE
+  </a>
+</div>
+
+<div style="margin-top:10px; font-size:12px; color:#aaa; letter-spacing:1px;">
+  Fastest: text your tire size + location (Ottawa / Gatineau / Quebec)
+</div>
+
+      
+      <div class="brand-row">
+        <div class="brand-tag">Michelin</div><div class="brand-tag">Bridgestone</div>
+        <div class="brand-tag">Pirelli</div><div class="brand-tag">Continental</div>
+        <div class="brand-tag">Goodyear</div>
+      </div>
     </section>
 
     <div class="tech-grid">
-      <div class="tech-card">
+      <div class="tech-card" data-aos="fade-up">
         <i class="fas fa-snowflake"></i>
         <h3>Seasonal Swap</h3>
-        <p>Expert seasonal transitions for summer and winter sets performed at your home or work.</p>
+        <p>Expert seasonal transitions for summer and winter tire sets performed on-site.</p>
       </div>
-      <div class="tech-card">
-        <i class="fas fa-screwdriver-wrench"></i>
+      <div class="tech-card" data-aos="fade-up" data-aos-delay="100">
+        <i class="fas fa-tools"></i>
         <h3>Flat Repair</h3>
-        <p>Rapid response for punctures, bead leaks, and digital sensor resets on location.</p>
+        <p>Rapid response for punctures, bead leaks, and digital sensor resets.</p>
+      </div>
+      <div class="tech-card" data-aos="fade-up" data-aos-delay="200">
+        <i class="fas fa-crosshairs"></i>
+        <h3>Off-Rim Balance</h3>
+        <p>Precision mounting and electronic computer balancing for optimal road feel.</p>
       </div>
     </div>
 
     <div class="reviews-ticker-wrapper">
       <div class="reviews-content">
         <div class="review-item">
-          <div style="color: #facc15; margin-bottom: 12px;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-          <p style="font-size: 13px;">"Professional, fast, and great pricing. Came to my work and finished in 30 mins."</p>
+          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p>"Professional, fast, and great pricing. Came to my driveway and finished quickly."</p>
           <div style="color: var(--cyan); font-size: 11px; font-weight: 800; margin-top: 15px;">MIKE R. • VERIFIED</div>
         </div>
         <div class="review-item">
-          <div style="color: #facc15; margin-bottom: 12px;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-          <p style="font-size: 13px;">"Saved me from a flat on the 401. Arrived quickly and got me back on the road."</p>
+          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p>"Saved me from a flat and got me back on the road fast. Highly recommended."</p>
           <div style="color: var(--cyan); font-size: 11px; font-weight: 800; margin-top: 15px;">SARAH J. • VERIFIED</div>
+        </div>
+        <div class="review-item">
+          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p>"On-time, clean work, and fair price. Will use again for winter swap."</p>
+          <div style="color: var(--cyan); font-size: 11px; font-weight: 800; margin-top: 15px;">ALEX P. • VERIFIED</div>
         </div>
       </div>
     </div>
 
     <section id="quote" style="padding-bottom: 200px;">
-      <div class="tech-card" style="max-width: 600px; margin: 0 auto; border-color: var(--cyan);">
-        <h3 style="text-align: center; margin-bottom: 30px; letter-spacing: 2px;">REQUEST DEPLOYMENT</h3>
+      <div class="tech-card" style="max-width: 600px; margin: 0 auto; border-color: var(--cyan);" data-aos="zoom-in">
+        <h3 style="text-align: center; margin-bottom: 30px;">Request Deployment</h3>
         <form onsubmit="sendEmail(event)">
-          <input type="text" id="cName" placeholder="CLIENT NAME" required style="width: 100%; background:transparent; border:none; border-bottom:1px solid #333; padding: 18px 0; color: #fff; margin-bottom: 20px; font-family: inherit;">
-          <input type="text" id="cPhone" placeholder="CONTACT NUMBER" required style="width: 100%; background:transparent; border:none; border-bottom:1px solid #333; padding: 18px 0; color: #fff; margin-bottom: 20px; font-family: inherit;">
-          <textarea id="cDetails" placeholder="TIRE SIZE & LOCATION DATA" style="width: 100%; background:transparent; border:none; border-bottom:1px solid #333; padding: 15px 0; color: #fff; margin-bottom: 30px; height: 80px; font-family: inherit;"></textarea>
-          <button type="submit" style="width: 100%; background: var(--cyan); color: #000; border: none; padding: 22px; border-radius: 4px; font-weight: 800; cursor: pointer; text-transform: uppercase;">Execute Deployment</button>
+          <input type="text" id="cName" placeholder="NAME" required style="width: 100%; background:transparent; border:none; border-bottom:1px solid #333; padding: 15px 0; color: #fff; margin-bottom: 20px;">
+          <input type="text" id="cPhone" placeholder="PHONE" required style="width: 100%; background:transparent; border:none; border-bottom:1px solid #333; padding: 15px 0; color: #fff; margin-bottom: 20px;">
+          <textarea id="cDetails" placeholder="TIRE SIZE & LOCATION (Ottawa / Gatineau / Quebec)" style="width: 100%; background:transparent; border:none; border-bottom:1px solid #333; padding: 15px 0; color: #fff; margin-bottom: 30px; height: 80px;"></textarea>
+          <button type="submit" style="width: 100%; background: var(--cyan); color: #000; border: none; padding: 22px; border-radius: 4px; font-weight: 800; cursor: pointer;">DEPLOY NOW</button>
         </form>
       </div>
     </section>
@@ -183,8 +236,8 @@
     AOS.init({ duration: 1500, once: true });
     function sendEmail(e) {
       e.preventDefault();
-      const body = `Client: ${document.getElementById('cName').value}%0D%0APhone: ${document.getElementById('cPhone').value}%0D%0AData: ${document.getElementById('cDetails').value}`;
-      window.location.href = `mailto:mirzaartslan@gmail.com?subject=Tire Service Request&body=${body}`;
+      const body = `Client: ${document.getElementById('cName').value}%0D%0APhone: ${document.getElementById('cPhone').value}%0D%0AData: ${document.getElementById('cDetails').value}%0D%0AService Area: Ottawa / Gatineau / Quebec`;
+      window.location.href = `mailto:mirzaartslan@gmail.com?subject=Tire Service Deployment&body=${body}`;
     }
   </script>
 </body>
