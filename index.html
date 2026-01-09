@@ -506,6 +506,36 @@
       .call-btn::after{animation:none !important;}
       html{scroll-behavior:auto;}
     }
+
+    /* ✅ Mobile fix: keep mini-nav but make it smaller + non-blocking */
+@media (max-width: 600px){
+  main{ padding-top: 140px; } /* ticker + mini-nav height */
+
+  .mini-nav{
+    top: 52px;
+    width: calc(100% - 16px);
+    padding: 8px 10px;
+    gap: 8px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    -webkit-overflow-scrolling: touch;
+  }
+  .mini-nav::-webkit-scrollbar{ display:none; }
+
+  .mini-nav a{
+    font-size: 9px;
+    letter-spacing: 1px;
+    padding: 6px 10px;
+    white-space: nowrap;
+  }
+
+  .hero{ padding-top: 18px; }
+}
+
+
+
+    
   </style>
 </head>
 
@@ -792,4 +822,5 @@
   </script>
 </body>
 </html>
+
 
